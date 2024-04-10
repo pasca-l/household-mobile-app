@@ -5,7 +5,7 @@ services:
     build: .
     platform: linux/amd64
     volumes:
-      - ./src/:/home/local/
+      - ./household_app/app/:/home/local/
       - node_modules:/home/local/node_modules
     stdin_open: true
     tty: true

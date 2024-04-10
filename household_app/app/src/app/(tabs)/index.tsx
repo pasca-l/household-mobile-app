@@ -5,14 +5,14 @@ import EditScreenInfo from "@/components/EditScreenInfo";
 import { Text, View } from "@/components/Themed";
 
 import { collection, getDocs } from "firebase/firestore";
-import { firestore } from "@/utils/Firebase";
+import { FIRESTORE } from "@/utils/firebaseUtils";
 
 export default function TabOneScreen() {
-  const [ExpenseList, setExpenseList] = useState([] as any);
+  const [ExpenseList, setExpenseList] = useState<any[]>([]);
 
   useEffect(() => {
     (async () => {
-      const querySnapshot = await getDocs(collection(firestore, "expenses"));
+      const querySnapshot = await getDocs(collection(FIRESTORE, "expenses"));
       querySnapshot.forEach((doc) => {
         setExpenseList((a: any) => [...a, { id: doc.id, expense: doc.data() }]);
       });
