@@ -4,13 +4,21 @@ services:
   app:
     build:
       context: .
-      dockerfile: "Dockerfile.dev"
+      dockerfile: "Dockerfile.prod"
     platform: linux/amd64
     volumes:
       - type: bind
         source: ./household_app/app/
         target: /home/local/
+      - type: volume
+        source: node_modules
+        target: /home/local/node_modules
     stdin_open: true
     tty: true
     ports:
       - 8081:8081
+    command: >
+      sh -c "yarn start"
+
+volumes:
+  node_modules:
