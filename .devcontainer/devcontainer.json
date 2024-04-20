@@ -1,0 +1,15 @@
+{
+	"name": "React Native development environment inside docker container",
+
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/home/local/",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+			]
+		}
+	},
+}

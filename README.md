@@ -1,25 +1,38 @@
-# Household App
+# Household App <!-- omit in toc -->
 This product holds an application to keep track of household activities and records (eg. schedules, spendings, ...)
 
+## Table of contents <!-- omit in toc -->
+- [Requirements](#requirements)
+- [Run on development mode](#run-on-development-mode)
+- [Run on production mode](#run-on-production-mode)
+- [Functions](#functions)
+
 ## Requirements
+- Docker 25.0.3
+- Docker Compose v2.24.6
 
 ## Run on development mode
+> Development mode binds the installed package modules to the local folder, in order for editor linters to work properly.
+
 1. Set up docker container, and enter container.
 ```shell
 $ docker compose up -d && docker compose exec app bash
 ```
 
-### Run on web browser
-1. Run application, and access [localhost](http://localhost:8081/).
+2. Run application.
 ```shell
-(container) $ yarn start
+(container) $ yarn install && yarn start
+```
+- To access on web browser, access [localhost](http://localhost:8081/).
+  - To use a tunnel URL, use option `--tunnel`.
+- To access on iOS device (iPhone, etc.), read QR code via `Expo Go` app.
+
+## Run on production mode
+1. Set up docker container, and automatically start app.
+```shell
+$ make app
 ```
 
-### Run on iOS device (iPhone, etc.)
-1. Install `Expo Go` application on the iOS device.
-
-2. Run application, and read QR code.
-```shell
-(container) $ yarn start
-```
-- To use a tunnel URL, use option `--tunnel`.
+## Functions
+- Household account book
+- Calendar (Schedule)
