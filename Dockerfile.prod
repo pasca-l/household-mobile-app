@@ -4,5 +4,5 @@ WORKDIR /home/local/
 
 RUN apt-get update && apt-get upgrade -y
 
-COPY household_app/app /home/local/
+COPY expo_app/ /home/local/
 RUN yarn install
