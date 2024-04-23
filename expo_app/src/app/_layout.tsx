@@ -9,7 +9,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
-import { useColorScheme } from "@/views/components/examples/useColorScheme";
+import { useColorScheme } from "@/features/examples/useColorScheme";
 import { PaperProvider } from "react-native-paper";
 
 export {

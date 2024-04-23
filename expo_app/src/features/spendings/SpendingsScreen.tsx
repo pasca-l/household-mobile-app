@@ -1,8 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import { Divider, Text } from "react-native-paper";
 
-import SpendingsForm from "../components/SpendingsForm";
-import SpendingsDataTable from "../components/SpendingsDataTable";
+import SpendingsForm from "./components/SpendingsForm";
+import SpendingsDataTable from "./components/SpendingsDataTable";
 
 export default function SpendingsScreen() {
   return (

@@ -1,4 +1,4 @@
-import SpendingsScreen from "@/views/pages/SpendingsScreen";
+import SpendingsScreen from "@/features/spendings/SpendingsScreen";
 
 export default function TabOneScreen() {
   return <SpendingsScreen />;
