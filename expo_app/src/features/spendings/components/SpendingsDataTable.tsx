@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 import { Button, DataTable } from "react-native-paper";
 
 import {
@@ -10,14 +11,15 @@ import {
   query,
 } from "firebase/firestore";
 import { FIRESTORE } from "@/utils/firebaseUtils";
-import { ScrollView } from "react-native";
 
 export default function SpendingsDataTable() {
   type Expense = {
     id: string;
-    name: string;
-    date: Date;
+    category: string;
     value: number;
+    purchase_date: Date;
+    purchaser: Map<string, string | boolean>;
+    note: string;
   };
 
   const [expenseList, setExpenseList] = useState<Expense[]>([]);
@@ -25,14 +27,19 @@ export default function SpendingsDataTable() {
   useEffect(() => {
     (async () => {
       onSnapshot(
-        query(collection(FIRESTORE, "expenses"), orderBy("date", "asc")),
+        query(
+          collection(FIRESTORE, "expenses"),
+          orderBy("purchase_date", "asc")
+        ),
         (snapshot) => {
           setExpenseList(
             snapshot.docs.map((doc) => ({
               id: doc.id,
-              name: doc.data().name,
-              date: doc.data().date,
+              category: doc.data().category,
               value: doc.data().value,
+              purchase_date: doc.data().purchase_date,
+              purchaser: doc.data().purchaser,
+              note: doc.data().note,
             }))
           );
         }
@@ -46,7 +53,7 @@ export default function SpendingsDataTable() {
     <ScrollView>
       <DataTable>
         <DataTable.Header>
-          <DataTable.Title>Name</DataTable.Title>
+          <DataTable.Title>Category</DataTable.Title>
           <DataTable.Title>Value</DataTable.Title>
         </DataTable.Header>
         {expenseList.map((item: any) => (
@@ -56,7 +63,7 @@ export default function SpendingsDataTable() {
               console.log(e);
             }}
           >
-            <DataTable.Cell>{item.name}</DataTable.Cell>
+            <DataTable.Cell>{item.category}</DataTable.Cell>
             <DataTable.Cell numeric>{item.value}</DataTable.Cell>
             <DataTable.Cell>
               <Button
