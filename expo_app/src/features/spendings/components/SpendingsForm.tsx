@@ -5,7 +5,7 @@ import { TextInput, Button, List } from "react-native-paper";
 import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { FIRESTORE } from "@/utils/firebaseUtils";
 
-export default function SpendingsForm() {
+export default function SpendingsForm(props: any) {
   type ExpenseRecord = {
     created_at: Timestamp;
     updated_at: Timestamp;
@@ -13,7 +13,8 @@ export default function SpendingsForm() {
     value: number;
     purchase_date: Timestamp;
     purchaser: {
-      name: string;
+      user_id: string;
+      email: string;
       from_pocket: boolean;
     };
     note: string;
@@ -80,12 +81,16 @@ export default function SpendingsForm() {
             value: Number(inputValue),
             purchase_date: Timestamp.fromDate(new Date()),
             purchaser: {
-              name: "",
+              user_id: "",
+              email: "",
               from_pocket: false,
             },
             note: "",
           };
-          await addDoc(collection(FIRESTORE, "expenses"), record);
+          await addDoc(
+            collection(FIRESTORE, `spendings/${props.id}/expenses`),
+            record
+          );
         }}
       >
         Send Button

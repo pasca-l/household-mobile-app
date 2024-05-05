@@ -12,7 +12,7 @@ import {
 } from "firebase/firestore";
 import { FIRESTORE } from "@/utils/firebaseUtils";
 
-export default function SpendingsDataTable() {
+export default function SpendingsDataTable(props: any) {
   type Expense = {
     id: string;
     category: string;
@@ -28,7 +28,7 @@ export default function SpendingsDataTable() {
     (async () => {
       onSnapshot(
         query(
-          collection(FIRESTORE, "expenses"),
+          collection(FIRESTORE, `spendings/${props.id}/expenses`),
           orderBy("purchase_date", "asc")
         ),
         (snapshot) => {
@@ -56,7 +56,7 @@ export default function SpendingsDataTable() {
           <DataTable.Title>Category</DataTable.Title>
           <DataTable.Title>Value</DataTable.Title>
         </DataTable.Header>
-        {expenseList.map((item: any) => (
+        {expenseList.map((item: Expense) => (
           <DataTable.Row
             key={item.id}
             onPress={(e) => {
@@ -68,7 +68,9 @@ export default function SpendingsDataTable() {
             <DataTable.Cell>
               <Button
                 onPress={async () => {
-                  await deleteDoc(doc(FIRESTORE, "expenses", item.id));
+                  await deleteDoc(
+                    doc(FIRESTORE, `spendings/${props.id}/expenses`, item.id)
+                  );
                 }}
               >
                 Delete
