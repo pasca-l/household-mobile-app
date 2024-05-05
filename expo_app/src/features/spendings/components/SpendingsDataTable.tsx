@@ -13,32 +13,30 @@ import {
 import { FIRESTORE } from "@/utils/firebaseUtils";
 
 export default function SpendingsDataTable(props: any) {
-  type Expense = {
+  type Receipt = {
     id: string;
     category: string;
     value: number;
     purchase_date: Date;
-    purchaser: Map<string, string | boolean>;
     note: string;
   };
 
-  const [expenseList, setExpenseList] = useState<Expense[]>([]);
+  const [receiptList, setReceiptList] = useState<Receipt[]>([]);
 
   useEffect(() => {
     (async () => {
       onSnapshot(
         query(
-          collection(FIRESTORE, `spendings/${props.id}/expenses`),
+          collection(FIRESTORE, `spendings/${props.id}/receipts`),
           orderBy("purchase_date", "asc")
         ),
         (snapshot) => {
-          setExpenseList(
+          setReceiptList(
             snapshot.docs.map((doc) => ({
               id: doc.id,
               category: doc.data().category,
               value: doc.data().value,
               purchase_date: doc.data().purchase_date,
-              purchaser: doc.data().purchaser,
               note: doc.data().note,
             }))
           );
@@ -56,7 +54,7 @@ export default function SpendingsDataTable(props: any) {
           <DataTable.Title>Category</DataTable.Title>
           <DataTable.Title>Value</DataTable.Title>
         </DataTable.Header>
-        {expenseList.map((item: Expense) => (
+        {receiptList.map((item: Receipt) => (
           <DataTable.Row
             key={item.id}
             onPress={(e) => {
@@ -69,7 +67,7 @@ export default function SpendingsDataTable(props: any) {
               <Button
                 onPress={async () => {
                   await deleteDoc(
-                    doc(FIRESTORE, `spendings/${props.id}/expenses`, item.id)
+                    doc(FIRESTORE, `spendings/${props.id}/receipts`, item.id)
                   );
                 }}
               >

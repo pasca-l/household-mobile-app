@@ -6,17 +6,12 @@ import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { FIRESTORE } from "@/utils/firebaseUtils";
 
 export default function SpendingsForm(props: any) {
-  type ExpenseRecord = {
+  type Receipt = {
     created_at: Timestamp;
     updated_at: Timestamp;
     category: string;
     value: number;
     purchase_date: Timestamp;
-    purchaser: {
-      user_id: string;
-      email: string;
-      from_pocket: boolean;
-    };
     note: string;
   };
 
@@ -74,21 +69,16 @@ export default function SpendingsForm(props: any) {
           setInputValue("");
           setPickedCategory("");
 
-          const record: ExpenseRecord = {
+          const record: Receipt = {
             created_at: Timestamp.fromDate(new Date()),
             updated_at: Timestamp.fromDate(new Date()),
             category: pickedCategory,
             value: Number(inputValue),
             purchase_date: Timestamp.fromDate(new Date()),
-            purchaser: {
-              user_id: "",
-              email: "",
-              from_pocket: false,
-            },
             note: "",
           };
           await addDoc(
-            collection(FIRESTORE, `spendings/${props.id}/expenses`),
+            collection(FIRESTORE, `spendings/${props.id}/receipts`),
             record
           );
         }}
