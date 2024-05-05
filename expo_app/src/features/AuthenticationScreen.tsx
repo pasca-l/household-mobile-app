@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import { AUTHENTICATION } from "@/utils/firebaseUtils";
 import { GOOGLE_PROVIDER } from "@/utils/authProviders";
+import { View } from "react-native";
 
 export default function AuthenticationScreen() {
   const [userName, setUserName] = useState("");
@@ -33,7 +34,7 @@ export default function AuthenticationScreen() {
   }, []);
 
   return (
-    <>
+    <View>
       <Text>{userName}</Text>
       <Text>{userUID}</Text>
       <Button
@@ -75,6 +76,6 @@ export default function AuthenticationScreen() {
       >
         Sign out
       </Button>
-    </>
+    </View>
   );
 }
