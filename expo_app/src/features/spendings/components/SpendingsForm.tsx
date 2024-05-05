@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextInput as NativeTextInput } from "react-native";
+import { TextInput as NativeTextInput, View } from "react-native";
 import { TextInput, Button, List } from "react-native-paper";
 
 import { Timestamp, addDoc, collection } from "firebase/firestore";
@@ -15,6 +15,7 @@ export default function SpendingsForm(props: any) {
     note: string;
   };
 
+  const [inputDate, setInputDate] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [pickedCategory, setPickedCategory] = useState<string>("");
   const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
@@ -31,7 +32,14 @@ export default function SpendingsForm(props: any) {
   ];
 
   return (
-    <>
+    <View>
+      <TextInput
+        mode="flat"
+        label="purchase_date"
+        value={inputDate}
+        onChangeText={setInputDate}
+        placeholder="YYYY-MM-DD"
+      />
       <TextInput
         mode="flat"
         label="Item value"
@@ -74,7 +82,7 @@ export default function SpendingsForm(props: any) {
             updated_at: Timestamp.fromDate(new Date()),
             category: pickedCategory,
             value: Number(inputValue),
-            purchase_date: Timestamp.fromDate(new Date()),
+            purchase_date: Timestamp.fromDate(new Date(Date.parse(inputDate))),
             note: "",
           };
           await addDoc(
@@ -85,6 +93,6 @@ export default function SpendingsForm(props: any) {
       >
         Send Button
       </Button>
-    </>
+    </View>
   );
 }
