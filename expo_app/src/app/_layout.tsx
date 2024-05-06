@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { PaperProvider } from "react-native-paper";
+import { MD3LightTheme, PaperProvider } from "react-native-paper";
 
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -29,7 +29,7 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={MD3LightTheme}>
       <SafeAreaProvider>
         <Slot />
       </SafeAreaProvider>
