@@ -12,13 +12,7 @@ export default function SpendingsForm(props: any) {
     category: string;
     value: number;
     purchase_date: Timestamp;
-    note: string;
   };
-
-  const [inputDate, setInputDate] = useState<string>("");
-  const [inputValue, setInputValue] = useState<string>("");
-  const [pickedCategory, setPickedCategory] = useState<string>("");
-  const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
 
   const categories = [
     "food",
@@ -30,6 +24,11 @@ export default function SpendingsForm(props: any) {
     "electricity",
     "house rent",
   ];
+
+  const [inputDate, setInputDate] = useState<string>("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [pickedCategory, setPickedCategory] = useState<string>(categories[0]);
+  const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
 
   return (
     <View>
@@ -75,7 +74,6 @@ export default function SpendingsForm(props: any) {
         mode="outlined"
         onPress={async () => {
           setInputValue("");
-          setPickedCategory("");
 
           const record: Receipt = {
             created_at: Timestamp.fromDate(new Date()),
@@ -83,7 +81,6 @@ export default function SpendingsForm(props: any) {
             category: pickedCategory,
             value: Number(inputValue),
             purchase_date: Timestamp.fromDate(new Date(Date.parse(inputDate))),
-            note: "",
           };
           await addDoc(
             collection(FIRESTORE, `spendings/${props.id}/receipts`),

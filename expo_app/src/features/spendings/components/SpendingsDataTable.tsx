@@ -18,7 +18,6 @@ export default function SpendingsDataTable(props: any) {
     category: string;
     value: number;
     purchase_date: Date;
-    note: string;
   };
 
   const [receiptList, setReceiptList] = useState<Receipt[]>([]);
@@ -28,7 +27,8 @@ export default function SpendingsDataTable(props: any) {
       onSnapshot(
         query(
           collection(FIRESTORE, `spendings/${props.id}/receipts`),
-          orderBy("purchase_date", "asc")
+          orderBy("purchase_date", "asc"),
+          orderBy("created_at", "asc")
         ),
         (snapshot) => {
           setReceiptList(
@@ -36,8 +36,7 @@ export default function SpendingsDataTable(props: any) {
               id: doc.id,
               category: doc.data().category,
               value: doc.data().value,
-              purchase_date: doc.data().purchase_date,
-              note: doc.data().note,
+              purchase_date: doc.data().purchase_date.toDate(),
             }))
           );
         }
@@ -51,8 +50,10 @@ export default function SpendingsDataTable(props: any) {
     <ScrollView>
       <DataTable>
         <DataTable.Header>
+          <DataTable.Title>Purchase date</DataTable.Title>
           <DataTable.Title>Category</DataTable.Title>
           <DataTable.Title>Value</DataTable.Title>
+          <DataTable.Title> </DataTable.Title>
         </DataTable.Header>
         {receiptList.map((item: Receipt) => (
           <DataTable.Row
@@ -61,6 +62,9 @@ export default function SpendingsDataTable(props: any) {
               console.log(e);
             }}
           >
+            <DataTable.Cell>
+              {item.purchase_date.toISOString().split("T")[0]}
+            </DataTable.Cell>
             <DataTable.Cell>{item.category}</DataTable.Cell>
             <DataTable.Cell numeric>{item.value}</DataTable.Cell>
             <DataTable.Cell>
