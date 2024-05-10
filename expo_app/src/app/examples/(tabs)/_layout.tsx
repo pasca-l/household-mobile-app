@@ -3,7 +3,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
 import { Pressable } from "react-native";
 
-import Colors from "@/utils/constants/colors";
+import Colors from "@/features/examples/constants/colors";
 import { useColorScheme } from "@/features/examples/useColorScheme";
 import { useClientOnlyValue } from "@/features/examples/useClientOnlyValue";
 

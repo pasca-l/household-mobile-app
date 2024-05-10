@@ -9,8 +9,8 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { AUTHENTICATION } from "@/utils/firebaseUtils";
-import { GOOGLE_PROVIDER } from "@/utils/authProviders";
+import { AUTHENTICATION } from "@/utils/firebase/firebaseUtils";
+import { GOOGLE_PROVIDER } from "@/utils/firebase/authentiation/authProviders";
 import { View } from "react-native";
 
 export default function AuthenticationScreen() {

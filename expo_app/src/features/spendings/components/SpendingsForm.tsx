@@ -3,7 +3,7 @@ import { TextInput as NativeTextInput, View } from "react-native";
 import { TextInput, Button, List } from "react-native-paper";
 
 import { Timestamp, addDoc, collection } from "firebase/firestore";
-import { FIRESTORE } from "@/utils/firebaseUtils";
+import { FIRESTORE } from "@/utils/firebase/firebaseUtils";
 
 export default function SpendingsForm(props: any) {
   type Receipt = {

@@ -10,7 +10,7 @@ import {
   orderBy,
   query,
 } from "firebase/firestore";
-import { FIRESTORE } from "@/utils/firebaseUtils";
+import { FIRESTORE } from "@/utils/firebase/firebaseUtils";
 
 export default function SpendingsDataTable(props: any) {
   type Receipt = {
