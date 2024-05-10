@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { onAuthStateChanged } from "firebase/auth";
-import { AUTHENTICATION, FIRESTORE } from "@/utils/firebase/firebaseUtils";
+import { AUTHENTICATION, FIRESTORE } from "@/utils/firebase/firebaseConfig";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { List } from "react-native-paper";
 import { router } from "expo-router";

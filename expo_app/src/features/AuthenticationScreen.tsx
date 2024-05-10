@@ -9,7 +9,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { AUTHENTICATION } from "@/utils/firebase/firebaseUtils";
+import { AUTHENTICATION } from "@/utils/firebase/firebaseConfig";
 import { GOOGLE_PROVIDER } from "@/utils/firebase/authentiation/authProviders";
 import { View } from "react-native";
 
