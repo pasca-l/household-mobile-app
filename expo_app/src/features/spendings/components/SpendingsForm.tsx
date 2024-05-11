@@ -25,7 +25,9 @@ export default function SpendingsForm(props: any) {
     "house rent",
   ];
 
-  const [inputDate, setInputDate] = useState<string>("");
+  const [inputDate, setInputDate] = useState<string>(
+    new Date().toISOString().split("T")[0]
+  );
   const [inputValue, setInputValue] = useState<string>("");
   const [pickedCategory, setPickedCategory] = useState<string>(categories[0]);
   const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
