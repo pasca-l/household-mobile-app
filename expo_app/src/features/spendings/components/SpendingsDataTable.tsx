@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ScrollView } from "react-native";
-import { Button, DataTable } from "react-native-paper";
+import { Button, DataTable, Dialog, Portal, Text } from "react-native-paper";
 
 import {
   collection,
@@ -20,6 +20,7 @@ export default function SpendingsDataTable(props: any) {
     purchase_date: Date;
   };
 
+  const [showReceiptInfo, setShowReceiptInfo] = useState(false);
   const [receiptList, setReceiptList] = useState<Receipt[]>([]);
 
   useEffect(() => {
@@ -53,13 +54,12 @@ export default function SpendingsDataTable(props: any) {
           <DataTable.Title>Purchase date</DataTable.Title>
           <DataTable.Title>Category</DataTable.Title>
           <DataTable.Title>Value</DataTable.Title>
-          <DataTable.Title> </DataTable.Title>
         </DataTable.Header>
         {receiptList.map((item: Receipt) => (
           <DataTable.Row
             key={item.id}
-            onPress={(e) => {
-              console.log(e);
+            onPress={() => {
+              setShowReceiptInfo(true);
             }}
           >
             <DataTable.Cell>
@@ -67,17 +67,37 @@ export default function SpendingsDataTable(props: any) {
             </DataTable.Cell>
             <DataTable.Cell>{item.category}</DataTable.Cell>
             <DataTable.Cell numeric>{item.value}</DataTable.Cell>
-            <DataTable.Cell>
-              <Button
-                onPress={async () => {
-                  await deleteDoc(
-                    doc(FIRESTORE, `spendings/${props.id}/receipts`, item.id)
-                  );
+
+            <Portal>
+              <Dialog
+                visible={showReceiptInfo}
+                onDismiss={() => {
+                  setShowReceiptInfo(false);
                 }}
               >
-                Delete
-              </Button>
-            </DataTable.Cell>
+                <Dialog.Content>
+                  <Text>
+                    {item.category} {item.value}
+                  </Text>
+                </Dialog.Content>
+                <Dialog.Actions>
+                  <Button
+                    onPress={async () => {
+                      setShowReceiptInfo(false);
+                      await deleteDoc(
+                        doc(
+                          FIRESTORE,
+                          `spendings/${props.id}/receipts`,
+                          item.id
+                        )
+                      );
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </Dialog.Actions>
+              </Dialog>
+            </Portal>
           </DataTable.Row>
         ))}
       </DataTable>
