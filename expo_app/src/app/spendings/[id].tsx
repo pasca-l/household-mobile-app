@@ -8,7 +8,7 @@ export default function SpendingsByID() {
 
   return (
     <>
-      <SafeAreaView>
+      <SafeAreaView style={{ flex: 1 }}>
         <SpendingsScreen id={id} />
       </SafeAreaView>
     </>
