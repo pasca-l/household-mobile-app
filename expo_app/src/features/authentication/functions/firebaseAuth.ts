@@ -32,9 +32,7 @@ const isEmail = (obj: SignIn): obj is Email => {
 export const signInFirebaseAuth = ({ ...args }: SignIn) => {
   if (isEmail(args)) {
     return () => {
-      setPersistence(AUTHENTICATION, browserSessionPersistence).then(() => {
-        signInWithEmailAndPassword(AUTHENTICATION, args.email, args.password);
-      });
+      signInWithEmailAndPassword(AUTHENTICATION, args.email, args.password);
     };
   } else {
     switch (args.method) {
