@@ -21,7 +21,7 @@ export const useReceiptList = ({ id }: Spendings) => {
       onSnapshot(
         query(
           collection(FIRESTORE, `spendings/${id}/receipts`),
-          orderBy("purchase_date", "asc"),
+          orderBy("purchase_date", "desc"),
           orderBy("created_at", "asc")
         ),
         (snapshot) => {
