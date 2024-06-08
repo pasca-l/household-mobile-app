@@ -1,6 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
-import { Slot } from "expo-router";
+import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { MD3LightTheme, PaperProvider } from "react-native-paper";
@@ -30,7 +30,7 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={MD3LightTheme}>
       <SafeAreaProvider>
-        <Slot />
+        <Stack />
       </SafeAreaProvider>
     </PaperProvider>
   );

@@ -8,6 +8,11 @@ import SpendingsForm from "./components/SpendingsForm";
 export default function SpendingsScreen(props: any) {
   return (
     <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: props.id,
+        }}
+      />
       <Text variant="displaySmall">Spendings</Text>
       <Divider />
       <SpendingsForm id={props.id} />
