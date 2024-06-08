@@ -1,6 +1,7 @@
-import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
+
+import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 type Spendings = {
   id: string;

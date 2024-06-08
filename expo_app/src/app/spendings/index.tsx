@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-
-import { onAuthStateChanged } from "firebase/auth";
-import { AUTHENTICATION, FIRESTORE } from "@/utils/firebase/firebaseConfig";
-import { collection, onSnapshot, query } from "firebase/firestore";
-import { List } from "react-native-paper";
 import { router } from "expo-router";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
+import { List } from "react-native-paper";
+
+import { AUTHENTICATION, FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 export default function Spendings() {
   type Spendings = {

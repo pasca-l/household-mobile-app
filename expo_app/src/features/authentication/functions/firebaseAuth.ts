@@ -6,8 +6,8 @@ import {
   signOut,
 } from "firebase/auth";
 
-import { AUTHENTICATION } from "@/utils/firebase/firebaseConfig";
 import { GOOGLE_PROVIDER } from "@/utils/firebase/authentiation/authProviders";
+import { AUTHENTICATION } from "@/utils/firebase/firebaseConfig";
 
 type Email = {
   method: "email";

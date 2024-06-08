@@ -1,7 +1,6 @@
+import { router } from "expo-router";
 import { SafeAreaView } from "react-native";
 import { Button, Text } from "react-native-paper";
-
-import { router } from "expo-router";
 
 import Authentication from "./authentication";
 

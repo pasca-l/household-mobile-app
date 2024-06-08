@@ -1,5 +1,6 @@
-import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 import { deleteDoc, doc } from "firebase/firestore";
+
+import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 export const deleteFirestoreDoc = (spendingsId: string, itemId: string) => {
   return async () => {

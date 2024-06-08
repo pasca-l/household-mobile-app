@@ -1,10 +1,9 @@
-import { useEffect } from "react";
-import { MD3LightTheme, PaperProvider } from "react-native-paper";
-
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useFonts } from "expo-font";
 import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useFonts } from "expo-font";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useEffect } from "react";
+import { MD3LightTheme, PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.

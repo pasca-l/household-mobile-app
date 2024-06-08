@@ -1,7 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
+import { SafeAreaView } from "react-native";
 
 import SpendingsScreen from "@/features/spendings/SpendingsScreen";
-import { SafeAreaView } from "react-native";
 
 export default function SpendingsByID() {
   const { id } = useLocalSearchParams();

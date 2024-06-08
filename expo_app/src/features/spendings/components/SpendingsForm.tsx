@@ -1,8 +1,8 @@
+import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { useState } from "react";
 import { TextInput as NativeTextInput, View } from "react-native";
 import { TextInput, Button, List } from "react-native-paper";
 
-import { Timestamp, addDoc, collection } from "firebase/firestore";
 import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 export default function SpendingsForm(props: any) {
