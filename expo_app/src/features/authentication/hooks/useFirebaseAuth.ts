@@ -8,7 +8,7 @@ export const useFirebaseAuth = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(AUTHENTICATION, async (user) => {
-      user ? setUser(user) : setUser(null);
+      return user ? setUser(user) : setUser(null);
     });
 
     return () => unsubscribe();

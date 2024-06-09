@@ -6,28 +6,10 @@ import {
   signOut,
 } from "firebase/auth";
 
+import { SignIn, isEmail } from "../types/signin";
+
 import { GOOGLE_PROVIDER } from "@/utils/firebase/authentiation/authProviders";
 import { AUTHENTICATION } from "@/utils/firebase/firebaseConfig";
-
-type Email = {
-  method: "email";
-  email: string;
-  password: string;
-};
-
-type Google = {
-  method: "google";
-};
-
-type SignIn = Email | Google;
-
-const isEmail = (obj: SignIn): obj is Email => {
-  return (
-    obj.method === "email" &&
-    typeof obj.email === "string" &&
-    typeof obj.password === "string"
-  );
-};
 
 export const signInFirebaseAuth = ({ ...args }: SignIn) => {
   if (isEmail(args)) {
