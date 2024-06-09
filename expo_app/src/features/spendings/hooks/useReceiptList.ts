@@ -1,18 +1,10 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
+import { Receipt, receiptConverter } from "../types/receipt";
+import { Spendings } from "../types/spendings";
+
 import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
-
-type Spendings = {
-  id: string;
-};
-
-type Receipt = {
-  id: string;
-  category: string;
-  value: number;
-  purchase_date: Date;
-};
 
 export const useReceiptList = ({ id }: Spendings) => {
   const [receiptList, setReceiptList] = useState<Receipt[]>([]);
@@ -21,25 +13,31 @@ export const useReceiptList = ({ id }: Spendings) => {
     (async () => {
       onSnapshot(
         query(
-          collection(FIRESTORE, `spendings/${id}/receipts`),
+          collection(FIRESTORE, `spendings/${id}/receipts`).withConverter(
+            receiptConverter
+          ),
           orderBy("purchase_date", "desc"),
           orderBy("created_at", "asc")
         ),
         (snapshot) => {
           setReceiptList(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              category: doc.data().category,
-              value: doc.data().value,
-              purchase_date: doc.data().purchase_date.toDate(),
-            }))
+            snapshot.docs.map(
+              (doc): Receipt => ({
+                id: doc.id,
+                created_at: doc.data().created_at,
+                updated_at: doc.data().updated_at,
+                category: doc.data().category,
+                value: doc.data().value,
+                purchase_date: doc.data().purchase_date,
+              })
+            )
           );
         }
       );
     })();
 
     return () => {};
-  }, []);
+  }, [id]);
 
   return receiptList;
 };
