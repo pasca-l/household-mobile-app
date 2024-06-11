@@ -9,7 +9,7 @@ export default function SpendingsByID() {
   return (
     <>
       <SafeAreaView style={{ flex: 1 }}>
-        <SpendingsScreen id={id} />
+        <SpendingsScreen id={id.toString()} />
       </SafeAreaView>
     </>
   );

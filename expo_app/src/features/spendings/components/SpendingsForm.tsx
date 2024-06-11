@@ -3,8 +3,9 @@ import { TextInput as NativeTextInput, View } from "react-native";
 import { TextInput, Button, List } from "react-native-paper";
 
 import { addFirestoreDoc } from "../functions/firestoreCrud";
+import { Spendings } from "../types/spendings";
 
-export default function SpendingsForm(props: any) {
+export default function SpendingsForm(spendings: Spendings) {
   const categories = [
     "food",
     "daily goods",
@@ -67,7 +68,7 @@ export default function SpendingsForm(props: any) {
         mode="outlined"
         onPress={async () => {
           setInputValue("");
-          addFirestoreDoc(props.id, {
+          addFirestoreDoc(spendings.id, {
             created_at: new Date(),
             updated_at: new Date(),
             category: pickedCategory,

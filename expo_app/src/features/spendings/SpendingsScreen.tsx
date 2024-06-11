@@ -4,20 +4,21 @@ import { Divider, Text } from "react-native-paper";
 
 import SpendingsDataTable from "./components/SpendingsDataTable";
 import SpendingsForm from "./components/SpendingsForm";
+import { Spendings } from "./types/spendings";
 
-export default function SpendingsScreen(props: any) {
+export default function SpendingsScreen(spendings: Spendings) {
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: props.id,
+          title: spendings.id,
         }}
       />
       <Text variant="displaySmall">Spendings</Text>
       <Divider />
-      <SpendingsForm id={props.id} />
+      <SpendingsForm {...spendings} />
       <Divider />
-      <SpendingsDataTable id={props.id} />
+      <SpendingsDataTable {...spendings} />
       <Divider />
     </View>
   );
