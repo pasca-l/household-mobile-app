@@ -7,10 +7,8 @@ export default function SpendingsByID() {
   const { id } = useLocalSearchParams();
 
   return (
-    <>
-      <SafeAreaView style={{ flex: 1 }}>
-        <SpendingsScreen id={id.toString()} />
-      </SafeAreaView>
-    </>
+    <SafeAreaView style={{ flex: 1 }}>
+      <SpendingsScreen id={id.toString()} />
+    </SafeAreaView>
   );
 }
