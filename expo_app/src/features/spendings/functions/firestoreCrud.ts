@@ -16,10 +16,14 @@ export const addFirestoreDoc = async (
   );
 };
 
-export const deleteFirestoreDoc = (spendingsId: string, itemId: string) => {
-  return async () => {
-    await deleteDoc(
+export const deleteFirestoreDoc = async (
+  spendingsId: string,
+  receipt: Receipt
+) => {
+  if (typeof receipt?.id === "string") {
+    const itemId = receipt.id;
+    return await deleteDoc(
       doc(FIRESTORE, `spendings/${spendingsId}/receipts`, itemId)
     );
-  };
+  }
 };
