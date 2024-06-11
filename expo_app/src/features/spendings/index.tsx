@@ -1,3 +1,4 @@
+import { View } from "react-native";
 import { List } from "react-native-paper";
 
 import { useSpendingsList } from "./hooks/useSpendingsList";
@@ -11,17 +12,19 @@ export default function SpendingsIndex({
   const spendingsList = useSpendingsList();
 
   return (
-    <List.Section>
-      <List.Subheader>List of Spendings</List.Subheader>
-      {spendingsList.map((item: Spendings) => (
-        <List.Item
-          key={item.id}
-          title={item.id}
-          onPress={() => {
-            handleSpendingsRoute(item.id);
-          }}
-        />
-      ))}
-    </List.Section>
+    <View>
+      <List.Section>
+        <List.Subheader>List of Spendings</List.Subheader>
+        {spendingsList.map((item: Spendings) => (
+          <List.Item
+            key={item.id}
+            title={item.id}
+            onPress={() => {
+              handleSpendingsRoute(item.id);
+            }}
+          />
+        ))}
+      </List.Section>
+    </View>
   );
 }
