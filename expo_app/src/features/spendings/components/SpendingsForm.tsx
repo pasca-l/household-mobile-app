@@ -3,25 +3,17 @@ import { TextInput as NativeTextInput, View } from "react-native";
 import { TextInput, Button, List } from "react-native-paper";
 
 import { addFirestoreDoc } from "../functions/firestoreCrud";
+import { Category, category } from "../types/category";
 import { Spendings } from "../types/spendings";
 
 export default function SpendingsForm(spendings: Spendings) {
-  const categories = [
-    "food",
-    "daily goods",
-    "home appliance",
-    "network",
-    "gas",
-    "water",
-    "electricity",
-    "house rent",
-  ];
+  const categories: Category[] = Object.values(category);
 
   const [inputDate, setInputDate] = useState<string>(
     new Date().toISOString().split("T")[0]
   );
   const [inputValue, setInputValue] = useState<string>("");
-  const [pickedCategory, setPickedCategory] = useState<string>(categories[0]);
+  const [pickedCategory, setPickedCategory] = useState<Category>(categories[0]);
   const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
 
   return (
@@ -49,7 +41,7 @@ export default function SpendingsForm(spendings: Spendings) {
             setExpandAccordion(!expandAccordion);
           }}
         >
-          {categories.map((c: string) => {
+          {categories.map((c: Category) => {
             return (
               <List.Item
                 key={c}
