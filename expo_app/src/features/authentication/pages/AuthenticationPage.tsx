@@ -26,7 +26,13 @@ export default function AuthenticationPage({
             onPressSpendingsList={onPressSpendingsList}
           />
           <Divider style={styles.divider} />
-          <Button onPress={signOutFirebaseAuth}>Sign out</Button>
+          <Button
+            onPress={() => {
+              signOutFirebaseAuth();
+            }}
+          >
+            Sign out
+          </Button>
         </>
       ) : (
         <>

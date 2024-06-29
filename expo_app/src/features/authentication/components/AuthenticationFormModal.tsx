@@ -23,7 +23,12 @@ export default function AuthenticationFormModal({
         }}
       >
         <Dialog.Content>
-          <Button onPress={signInFirebaseAuth({ method: "google" })}>
+          <Button
+            onPress={() => {
+              signInFirebaseAuth({ method: "google" });
+              setShowForm(false);
+            }}
+          >
             Sign in with Google
           </Button>
           <Divider style={styles.divider} />
@@ -42,11 +47,14 @@ export default function AuthenticationFormModal({
             secureTextEntry={true}
           />
           <Button
-            onPress={signInFirebaseAuth({
-              method: "email",
-              email: inputEmail,
-              password: inputPassword,
-            })}
+            onPress={() => {
+              signInFirebaseAuth({
+                method: "email",
+                email: inputEmail,
+                password: inputPassword,
+              });
+              setShowForm(false);
+            }}
           >
             Sign in with email and password
           </Button>
