@@ -1,47 +1,37 @@
-import { useState } from "react";
 import { ScrollView } from "react-native";
 import { DataTable } from "react-native-paper";
 
-import SpendingsItemModal from "./SpendingsItemModal";
+import { category } from "../constants/category";
 import { useReceiptList } from "../hooks/useReceiptList";
-import { Receipt } from "../types/receipt";
+import { Category, CategorySummary } from "../types/category";
 import { Spendings } from "../types/spendings";
+import { aggregateToSummary } from "../utils/aggregation";
 
 export default function SpendingsSummary(spendings: Spendings) {
   const receiptList = useReceiptList(spendings);
-  const [selectedItem, setSelectedItem] = useState<Receipt>();
-  const [showItemModal, setShowItemModal] = useState<boolean>(false);
+  const summaryList = aggregateToSummary(receiptList);
 
   return (
     <ScrollView>
       <DataTable>
         <DataTable.Header>
-          <DataTable.Title>Purchase date</DataTable.Title>
-          <DataTable.Title>Category</DataTable.Title>
-          <DataTable.Title>Value</DataTable.Title>
+          <DataTable.Title>Period</DataTable.Title>
+          {category.map((c: Category) => (
+            <DataTable.Title>{c}</DataTable.Title>
+          ))}
         </DataTable.Header>
-        {receiptList.map((item: Receipt) => (
-          <DataTable.Row
-            key={item.id}
-            onPress={() => {
-              setShowItemModal(true);
-              setSelectedItem(item);
-            }}
-          >
+        {summaryList.map((item: CategorySummary) => (
+          <DataTable.Row key={item.id}>
             <DataTable.Cell>
-              {item.purchase_date.toISOString().split("T")[0]}
+              {/* slice up to YYYY-MM */}
+              {item.date.toISOString().slice(0, 7)}
             </DataTable.Cell>
-            <DataTable.Cell>{item.category}</DataTable.Cell>
-            <DataTable.Cell numeric>{item.value}</DataTable.Cell>
+            {category.map((c: Category) => (
+              <DataTable.Cell>{item.agg[c]}</DataTable.Cell>
+            ))}
           </DataTable.Row>
         ))}
       </DataTable>
-      <SpendingsItemModal
-        spendings={spendings}
-        item={selectedItem}
-        showItemModal={showItemModal}
-        setShowItemModal={setShowItemModal}
-      />
     </ScrollView>
   );
 }

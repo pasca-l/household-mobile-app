@@ -2,8 +2,8 @@ import { Stack } from "expo-router";
 import { View, StyleSheet } from "react-native";
 import { Divider } from "react-native-paper";
 
-import SpendingsDetail from "../components/SpendingsDetail";
 import SpendingsForm from "../components/SpendingsForm";
+import SpendingsSummary from "../components/SpendingsSummary";
 import { Spendings } from "../types/spendings";
 
 export default function SummaryPage(spendings: Spendings) {
@@ -16,7 +16,7 @@ export default function SummaryPage(spendings: Spendings) {
       />
       <SpendingsForm {...spendings} />
       <Divider />
-      <SpendingsDetail {...spendings} />
+      <SpendingsSummary {...spendings} />
       <Divider />
     </View>
   );
