@@ -1,7 +1,9 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Tabs } from "expo-router";
+import { Tabs, useLocalSearchParams } from "expo-router";
 
 export default function SpendingsTabLayout() {
+  const { id } = useLocalSearchParams();
+
   return (
     <Tabs
       screenOptions={{
@@ -18,6 +20,17 @@ export default function SpendingsTabLayout() {
             <FontAwesome size={28} name="home" color={color} />
           ),
         }}
+        initialParams={{ id }}
+      />
+      <Tabs.Screen
+        name="detail"
+        options={{
+          title: "Detail",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="bars" color={color} />
+          ),
+        }}
+        initialParams={{ id }}
       />
       <Tabs.Screen
         name="settings"
@@ -27,6 +40,7 @@ export default function SpendingsTabLayout() {
             <FontAwesome size={28} name="cog" color={color} />
           ),
         }}
+        initialParams={{ id }}
       />
     </Tabs>
   );
