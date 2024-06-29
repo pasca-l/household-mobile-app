@@ -17,7 +17,6 @@ export default function SummaryPage(spendings: Spendings) {
           title: spendings.id,
         }}
       />
-      {/* <SpendingsForm {...spendings} /> */}
       <SpendingsSummary {...spendings} />
       <FAB
         icon={"plus"}
