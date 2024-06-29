@@ -1,7 +1,7 @@
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native";
 
-import SpendingsIndex from "@/features/spendings";
+import ListPage from "@/features/spendings/pages/ListPage";
 
 export default function Spendings() {
   const handleSpendingsRoute = (spendingsId: string) => {
@@ -13,7 +13,7 @@ export default function Spendings() {
 
   return (
     <SafeAreaView>
-      <SpendingsIndex handleSpendingsRoute={handleSpendingsRoute} />
+      <ListPage handleSpendingsRoute={handleSpendingsRoute} />
     </SafeAreaView>
   );
 }

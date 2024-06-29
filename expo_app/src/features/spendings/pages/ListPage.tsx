@@ -1,10 +1,10 @@
 import { View } from "react-native";
 import { List } from "react-native-paper";
 
-import { useSpendingsList } from "./hooks/useSpendingsList";
-import { Spendings } from "./types/spendings";
+import { useSpendingsList } from "../hooks/useSpendingsList";
+import { Spendings } from "../types/spendings";
 
-export default function SpendingsIndex({
+export default function ListPage({
   handleSpendingsRoute,
 }: {
   handleSpendingsRoute: (spendingsId: string) => void;
