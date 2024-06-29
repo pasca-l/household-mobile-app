@@ -1,21 +1,18 @@
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native";
-import { Button, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 
-import AuthenticationScreen from "@/features/authentication/AuthenticationScreen";
+import AuthenticationPage from "@/features/authentication/pages/AuthenticationPage";
 
 export default function Root() {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Text>Root page</Text>
-      <AuthenticationScreen />
-      <Button
-        onPress={() => {
+      <AuthenticationPage
+        onPressSpendingsList={() => {
           router.push("/spendings/");
         }}
-      >
-        Move to Spendings page
-      </Button>
+      />
     </SafeAreaView>
   );
 }

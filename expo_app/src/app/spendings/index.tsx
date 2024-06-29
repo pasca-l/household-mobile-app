@@ -12,7 +12,7 @@ export default function Spendings() {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <ListPage handleSpendingsRoute={handleSpendingsRoute} />
     </SafeAreaView>
   );
