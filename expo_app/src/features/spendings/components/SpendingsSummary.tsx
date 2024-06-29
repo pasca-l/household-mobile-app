@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { DataTable } from "react-native-paper";
 
 import { category } from "../constants/category";
@@ -12,26 +12,40 @@ export default function SpendingsSummary(spendings: Spendings) {
   const summaryList = aggregateToSummary(receiptList);
 
   return (
-    <ScrollView>
-      <DataTable>
-        <DataTable.Header>
-          <DataTable.Title>Period</DataTable.Title>
-          {category.map((c: Category) => (
-            <DataTable.Title key={c}>{c}</DataTable.Title>
-          ))}
-        </DataTable.Header>
-        {summaryList.map((item: CategorySummary) => (
-          <DataTable.Row key={item.id}>
-            <DataTable.Cell>
-              {/* slice up to YYYY-MM */}
-              {item.date.toISOString().slice(0, 7)}
-            </DataTable.Cell>
-            {category.map((c: Category) => (
-              <DataTable.Cell key={c}>{item.agg[c]}</DataTable.Cell>
+    <View>
+      <ScrollView>
+        <ScrollView horizontal={true}>
+          <DataTable style={styles.datatable}>
+            <DataTable.Header>
+              <DataTable.Title>Period</DataTable.Title>
+              {category.map((c: Category) => (
+                <DataTable.Title key={c} style={{ flex: 1 }}>
+                  {c}
+                </DataTable.Title>
+              ))}
+            </DataTable.Header>
+            {summaryList.map((item: CategorySummary) => (
+              <DataTable.Row key={item.id}>
+                <DataTable.Cell>
+                  {/* slice up to YYYY-MM */}
+                  {item.date.toISOString().slice(0, 7)}
+                </DataTable.Cell>
+                {category.map((c: Category) => (
+                  <DataTable.Cell key={c} style={{ flex: 1 }}>
+                    {item.agg[c] !== undefined ? item.agg[c] : "-"}
+                  </DataTable.Cell>
+                ))}
+              </DataTable.Row>
             ))}
-          </DataTable.Row>
-        ))}
-      </DataTable>
-    </ScrollView>
+          </DataTable>
+        </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  datatable: {
+    width: 1300,
+  },
+});

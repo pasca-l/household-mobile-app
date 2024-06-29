@@ -2,9 +2,9 @@ export const category = [
   "food",
   "daily goods",
   "home appliance",
-  "network",
+  "electricity",
   "gas",
   "water",
-  "electricity",
+  "network",
   "house rent",
 ] as const;
