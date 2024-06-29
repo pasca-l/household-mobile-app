@@ -2,11 +2,8 @@ import { useState } from "react";
 import { View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 
-import {
-  signInFirebaseAuth,
-  signOutFirebaseAuth,
-} from "./functions/firebaseAuth";
 import { useFirebaseAuth } from "./hooks/useFirebaseAuth";
+import { signInFirebaseAuth, signOutFirebaseAuth } from "./utils/firebaseAuth";
 
 export default function AuthenticationScreen() {
   const [inputEmail, setInputEmail] = useState("");
