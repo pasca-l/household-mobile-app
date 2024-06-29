@@ -5,11 +5,13 @@ import {
   Timestamp,
 } from "firebase/firestore";
 
+import { Category } from "./category";
+
 export type Receipt = {
   id?: string;
   created_at: Date;
   updated_at: Date;
-  category: string;
+  category: Category;
   value: number;
   purchase_date: Date;
 };

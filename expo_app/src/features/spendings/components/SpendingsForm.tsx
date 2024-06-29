@@ -2,9 +2,10 @@ import { useState } from "react";
 import { TextInput as NativeTextInput, View } from "react-native";
 import { TextInput, Button, List } from "react-native-paper";
 
-import { addFirestoreDoc } from "../functions/firestoreCrud";
-import { Category, category } from "../types/category";
+import { category } from "../constants/category";
+import { Category } from "../types/category";
 import { Spendings } from "../types/spendings";
+import { addFirestoreDoc } from "../utils/firestoreCrud";
 
 export default function SpendingsForm(spendings: Spendings) {
   const categories: Category[] = Object.values(category);

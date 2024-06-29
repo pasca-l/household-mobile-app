@@ -1,8 +1,8 @@
 import { Button, Dialog, Portal, Text } from "react-native-paper";
 
-import { deleteFirestoreDoc } from "../functions/firestoreCrud";
 import { Receipt } from "../types/receipt";
 import { Spendings } from "../types/spendings";
+import { deleteFirestoreDoc } from "../utils/firestoreCrud";
 
 export default function SpendingsItemModal({
   spendings,
