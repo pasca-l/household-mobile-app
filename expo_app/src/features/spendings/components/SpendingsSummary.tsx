@@ -17,7 +17,7 @@ export default function SpendingsSummary(spendings: Spendings) {
         <DataTable.Header>
           <DataTable.Title>Period</DataTable.Title>
           {category.map((c: Category) => (
-            <DataTable.Title>{c}</DataTable.Title>
+            <DataTable.Title key={c}>{c}</DataTable.Title>
           ))}
         </DataTable.Header>
         {summaryList.map((item: CategorySummary) => (
@@ -27,7 +27,7 @@ export default function SpendingsSummary(spendings: Spendings) {
               {item.date.toISOString().slice(0, 7)}
             </DataTable.Cell>
             {category.map((c: Category) => (
-              <DataTable.Cell>{item.agg[c]}</DataTable.Cell>
+              <DataTable.Cell key={c}>{item.agg[c]}</DataTable.Cell>
             ))}
           </DataTable.Row>
         ))}
