@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native";
 
 import SummaryPage from "@/features/spendings/pages/SummaryPage";
 
-export default function SpendingsByID() {
+export default function SpendingsSummary() {
   const { id } = useLocalSearchParams();
 
   return (

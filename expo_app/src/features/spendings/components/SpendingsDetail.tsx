@@ -7,7 +7,7 @@ import { useReceiptList } from "../hooks/useReceiptList";
 import { Receipt } from "../types/receipt";
 import { Spendings } from "../types/spendings";
 
-export default function Detail(spendings: Spendings) {
+export default function SpendingsDetail(spendings: Spendings) {
   const receiptList = useReceiptList(spendings);
   const [selectedItem, setSelectedItem] = useState<Receipt>();
   const [showItemModal, setShowItemModal] = useState<boolean>(false);
