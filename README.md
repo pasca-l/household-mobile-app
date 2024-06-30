@@ -41,4 +41,7 @@ $ make app
 
 ## Functions
 - Household account book
-- Calendar (Schedule)
+- Calendar (schedule)
+- Image folder?
+  - Keeping receipts
+  - Sharing documents
