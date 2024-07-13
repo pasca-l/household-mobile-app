@@ -4,8 +4,9 @@ import { Button, Divider, FAB, Text } from "react-native-paper";
 
 import AuthenticationFormModal from "../components/AuthenticationFormModal";
 import AuthenticationServiceList from "../components/AuthenticationServiceList";
-import { useFirebaseAuth } from "../hooks/useFirebaseAuth";
 import { signOutFirebaseAuth } from "../utils/firebaseAuth";
+
+import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
 
 export default function AuthenticationPage({
   onPressSpendingsList,

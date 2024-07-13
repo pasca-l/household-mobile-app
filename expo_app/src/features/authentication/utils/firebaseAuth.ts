@@ -8,8 +8,8 @@ import {
 
 import { SignIn, isEmail } from "../types/signin";
 
-import { GOOGLE_PROVIDER } from "@/utils/firebase/authentiation/authProviders";
 import { AUTHENTICATION } from "@/utils/firebase/firebaseConfig";
+import { GOOGLE_PROVIDER } from "@/utils/firebase/providers/authProviders";
 
 export const signInFirebaseAuth = ({ ...args }: SignIn) => {
   if (isEmail(args)) {
