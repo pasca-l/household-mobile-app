@@ -46,7 +46,6 @@ export default function SpendingsFormModal({
             label="Item value"
             value={inputValue}
             onChangeText={setInputValue}
-            placeholder="300"
             render={(props) => (
               <NativeTextInput inputMode="numeric" {...props} />
             )}
@@ -85,6 +84,7 @@ export default function SpendingsFormModal({
                 value: Number(inputValue),
                 purchase_date: new Date(Date.parse(inputDate)),
               });
+              setShowForm(false);
             }}
           >
             Send Button

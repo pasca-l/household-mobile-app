@@ -1,12 +1,7 @@
-# Household App <!-- omit in toc -->
+# Household App
 This product holds an application to keep track of household activities and records (eg. schedules, spendings, ...)
 
-## Table of contents <!-- omit in toc -->
-- [Requirements](#requirements)
-- [Dependencies](#dependencies)
-- [Run on development mode](#run-on-development-mode)
-- [Run on production mode](#run-on-production-mode)
-- [Functions](#functions)
+## Screenshots
 
 ## Requirements
 - Docker 25.0.3

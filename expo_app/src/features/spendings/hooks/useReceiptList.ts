@@ -17,7 +17,7 @@ export const useReceiptList = ({ id }: Spendings) => {
             receiptConverter
           ),
           orderBy("purchase_date", "desc"),
-          orderBy("created_at", "asc")
+          orderBy("created_at", "desc")
         ),
         (snapshot) => {
           setReceiptList(
