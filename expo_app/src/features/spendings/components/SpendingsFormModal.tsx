@@ -130,6 +130,7 @@ export default function SpendingsFormModal({
               mode="outlined"
               onPress={async () => {
                 setInputValue("");
+                setPickedCategory(categories[0]);
                 addFirestoreDoc(spendings.id, {
                   created_at: new Date(),
                   updated_at: new Date(),
