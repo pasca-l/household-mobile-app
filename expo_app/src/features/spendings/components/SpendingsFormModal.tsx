@@ -1,20 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextInput as NativeTextInput } from "react-native";
-import { TextInput, Button, List, Portal, Dialog } from "react-native-paper";
+import {
+  TextInput,
+  Button,
+  List,
+  Portal,
+  Dialog,
+  Text,
+} from "react-native-paper";
 
 import { category } from "../constants/category";
 import { Category } from "../types/category";
+import { Receipt } from "../types/receipt";
 import { Spendings } from "../types/spendings";
-import { addFirestoreDoc } from "../utils/firestoreCrud";
+import {
+  addFirestoreDoc,
+  deleteFirestoreDoc,
+  updateFirestoreDoc,
+} from "../utils/firestoreCrud";
 
 export default function SpendingsFormModal({
   spendings,
-  showForm,
-  setShowForm,
+  item,
+  showModal,
+  setShowModal,
 }: {
   spendings: Spendings;
-  showForm: boolean;
-  setShowForm: (showForm: boolean) => void;
+  item: Receipt | undefined;
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
 }) {
   const categories: Category[] = Object.values(category);
 
@@ -25,18 +39,27 @@ export default function SpendingsFormModal({
   const [pickedCategory, setPickedCategory] = useState<Category>(categories[0]);
   const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (item) {
+      setInputDate(item.purchase_date.toISOString().split("T")[0]);
+      setInputValue(String(item.value));
+      setPickedCategory(item.category);
+    }
+  }, [item]);
+
   return (
     <Portal>
       <Dialog
-        visible={showForm}
+        visible={showModal}
         onDismiss={() => {
-          setShowForm(false);
+          setShowModal(false);
         }}
       >
         <Dialog.Content>
+          {item ? <Text>Item {item.id}</Text> : <></>}
           <TextInput
             mode="flat"
-            label="purchase_date"
+            label="Purchase date"
             value={inputDate}
             onChangeText={setInputDate}
             placeholder="YYYY-MM-DD"
@@ -73,22 +96,53 @@ export default function SpendingsFormModal({
             </List.Accordion>
           </List.Section>
 
-          <Button
-            mode="outlined"
-            onPress={async () => {
-              setInputValue("");
-              addFirestoreDoc(spendings.id, {
-                created_at: new Date(),
-                updated_at: new Date(),
-                category: pickedCategory,
-                value: Number(inputValue),
-                purchase_date: new Date(Date.parse(inputDate)),
-              });
-              setShowForm(false);
-            }}
-          >
-            Send Button
-          </Button>
+          {item ? (
+            <>
+              <Button
+                mode="outlined"
+                onPress={async () => {
+                  updateFirestoreDoc(spendings.id, {
+                    id: item.id,
+                    created_at: item.created_at,
+                    updated_at: new Date(),
+                    category: pickedCategory,
+                    value: Number(inputValue),
+                    purchase_date: new Date(Date.parse(inputDate)),
+                  });
+                  setShowModal(false);
+                }}
+              >
+                Update receipt
+              </Button>
+              <Dialog.Actions>
+                <Button
+                  onPress={() => {
+                    deleteFirestoreDoc(spendings.id, item);
+                    setShowModal(false);
+                  }}
+                >
+                  Delete
+                </Button>
+              </Dialog.Actions>
+            </>
+          ) : (
+            <Button
+              mode="outlined"
+              onPress={async () => {
+                setInputValue("");
+                addFirestoreDoc(spendings.id, {
+                  created_at: new Date(),
+                  updated_at: new Date(),
+                  category: pickedCategory,
+                  value: Number(inputValue),
+                  purchase_date: new Date(Date.parse(inputDate)),
+                });
+                setShowModal(false);
+              }}
+            >
+              Add receipt
+            </Button>
+          )}
         </Dialog.Content>
       </Dialog>
     </Portal>

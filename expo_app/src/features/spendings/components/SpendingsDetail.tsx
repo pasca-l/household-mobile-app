@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ScrollView } from "react-native";
 import { DataTable } from "react-native-paper";
 
-import SpendingsItemModal from "./SpendingsItemModal";
+import SpendingsFormModal from "./SpendingsFormModal";
 import { useReceiptList } from "../hooks/useReceiptList";
 import { Receipt } from "../types/receipt";
 import { Spendings } from "../types/spendings";
@@ -36,11 +36,11 @@ export default function SpendingsDetail(spendings: Spendings) {
           </DataTable.Row>
         ))}
       </DataTable>
-      <SpendingsItemModal
+      <SpendingsFormModal
         spendings={spendings}
         item={selectedItem}
-        showItemModal={showItemModal}
-        setShowItemModal={setShowItemModal}
+        showModal={showItemModal}
+        setShowModal={setShowItemModal}
       />
     </ScrollView>
   );
