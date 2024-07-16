@@ -26,7 +26,7 @@ export default function SpendingsFormModal({
   setShowModal,
 }: {
   spendings: Spendings;
-  item: Receipt | undefined;
+  item?: Receipt | undefined;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
 }) {

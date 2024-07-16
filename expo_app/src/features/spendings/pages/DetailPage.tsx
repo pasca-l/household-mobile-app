@@ -21,7 +21,6 @@ export default function DetailPage(spendings: Spendings) {
       />
       <SpendingsFormModal
         spendings={spendings}
-        item={undefined}
         showModal={showForm}
         setShowModal={setShowForm}
       />

@@ -27,7 +27,6 @@ export default function SummaryPage(spendings: Spendings) {
       />
       <SpendingsFormModal
         spendings={spendings}
-        item={undefined}
         showModal={showForm}
         setShowModal={setShowForm}
       />
