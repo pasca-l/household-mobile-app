@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TextInput as NativeTextInput } from "react-native";
+import { StyleSheet, TextInput as NativeTextInput } from "react-native";
 import {
   TextInput,
   Button,
@@ -38,12 +38,20 @@ export default function SpendingsFormModal({
   const [inputValue, setInputValue] = useState<string>("");
   const [pickedCategory, setPickedCategory] = useState<Category>(categories[0]);
   const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
+  const [disableDelete, setDisableDelete] = useState<boolean>(true);
 
   useEffect(() => {
     if (item) {
       setInputDate(item.purchase_date.toISOString().split("T")[0]);
       setInputValue(String(item.value));
       setPickedCategory(item.category);
+
+      setDisableDelete(true);
+      const timer = setTimeout(() => {
+        setDisableDelete(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
     }
   }, [item]);
 
@@ -55,7 +63,7 @@ export default function SpendingsFormModal({
           setShowModal(false);
         }}
       >
-        <Dialog.Content>
+        <Dialog.Content style={styles.dialog}>
           {item ? <Text>Item {item.id}</Text> : <></>}
           <TextInput
             mode="flat"
@@ -114,16 +122,16 @@ export default function SpendingsFormModal({
               >
                 Update receipt
               </Button>
-              <Dialog.Actions>
-                <Button
-                  onPress={() => {
-                    deleteFirestoreDoc(spendings.id, item);
-                    setShowModal(false);
-                  }}
-                >
-                  Delete
-                </Button>
-              </Dialog.Actions>
+              <Button
+                mode="outlined"
+                onPress={() => {
+                  deleteFirestoreDoc(spendings.id, item);
+                  setShowModal(false);
+                }}
+                disabled={disableDelete}
+              >
+                Delete
+              </Button>
             </>
           ) : (
             <Button
@@ -149,3 +157,9 @@ export default function SpendingsFormModal({
     </Portal>
   );
 }
+
+const styles = StyleSheet.create({
+  dialog: {
+    gap: 3,
+  },
+});
