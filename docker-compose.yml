@@ -8,9 +8,11 @@ services:
     platform: linux/amd64
     volumes:
       - type: bind
-        source: ./household_app/app/
+        source: ./expo_app/
         target: /home/local/
     stdin_open: true
     tty: true
     ports:
       - 8081:8081
+    # command: >
+    #   sh -c "yarn start --tunnel"

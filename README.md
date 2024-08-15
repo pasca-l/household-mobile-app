@@ -1,15 +1,16 @@
-# Household App <!-- omit in toc -->
+# Household App
 This product holds an application to keep track of household activities and records (eg. schedules, spendings, ...)
 
-## Table of contents <!-- omit in toc -->
-- [Requirements](#requirements)
-- [Run on development mode](#run-on-development-mode)
-- [Run on production mode](#run-on-production-mode)
-- [Functions](#functions)
+## Screenshots
 
 ## Requirements
 - Docker 25.0.3
 - Docker Compose v2.24.6
+
+## Dependencies
+- Expo
+- React Native Paper
+- Firebase
 
 ## Run on development mode
 > Development mode binds the installed package modules to the local folder, in order for editor linters to work properly.
@@ -35,4 +36,7 @@ $ make app
 
 ## Functions
 - Household account book
-- Calendar (Schedule)
+- Calendar (schedule)
+- Image folder?
+  - Keeping receipts
+  - Sharing documents
