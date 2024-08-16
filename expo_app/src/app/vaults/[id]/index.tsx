@@ -1,15 +1,8 @@
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native";
 
-// import SummaryPage from "@/features/spendings/pages/SummaryPage";
-
-export default function SpendingsSummary() {
+export default function VaultsSummary() {
   const { id } = useLocalSearchParams();
 
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      {id}
-      {/* <SummaryPage id={id.toString()} /> */}
-    </SafeAreaView>
-  );
+  return <SafeAreaView style={{ flex: 1 }}>{id}</SafeAreaView>;
 }
