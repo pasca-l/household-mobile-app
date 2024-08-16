@@ -15,10 +15,10 @@ export default function Root() {
             params: { id: spendingsId },
           });
         }}
-        handleVaultsRoute={(vaultsId: string) => {
+        handleVaultRoute={(vaultId: string) => {
           router.push({
             pathname: "/vaults/[id]/",
-            params: { id: vaultsId },
+            params: { id: vaultId },
           });
         }}
       />

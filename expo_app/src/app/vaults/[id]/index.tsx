@@ -3,7 +3,7 @@ import { SafeAreaView } from "react-native";
 
 import SummaryPage from "@/features/vaults/pages/SummaryPage";
 
-export default function VaultsSummary() {
+export default function VaultSummary() {
   const { id } = useLocalSearchParams();
 
   return (

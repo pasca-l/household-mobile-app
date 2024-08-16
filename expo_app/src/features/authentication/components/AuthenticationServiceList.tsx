@@ -1,17 +1,17 @@
 import SpendingsList from "@/features/spendings/components/SpendingsList";
-import VaultsList from "@/features/vaults/components/VaultsList";
+import VaultList from "@/features/vaults/components/VaultList";
 
 export default function AuthenticationServiceList({
   handleSpendingsRoute,
-  handleVaultsRoute,
+  handleVaultRoute,
 }: {
   handleSpendingsRoute: (spendingsId: string) => void;
-  handleVaultsRoute: (vaultsId: string) => void;
+  handleVaultRoute: (vaultId: string) => void;
 }) {
   return (
     <>
       <SpendingsList handleSpendingsRoute={handleSpendingsRoute} />
-      <VaultsList handleVaultsRoute={handleVaultsRoute} />
+      <VaultList handleVaultRoute={handleVaultRoute} />
     </>
   );
 }
