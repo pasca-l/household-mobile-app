@@ -9,8 +9,11 @@ export default function Root() {
     <SafeAreaView style={{ flex: 1 }}>
       <Text>Root page</Text>
       <AuthenticationPage
-        onPressSpendingsList={() => {
-          router.push("/spendings/");
+        handleSpendingsRoute={(spendingsId: string) => {
+          router.push({
+            pathname: "/spendings/[id]/",
+            params: { id: spendingsId },
+          });
         }}
       />
     </SafeAreaView>

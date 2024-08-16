@@ -1,13 +1,13 @@
-import { Button } from "react-native-paper";
+import SpendingsList from "@/features/spendings/components/SpendingsList";
 
 export default function AuthenticationServiceList({
-  onPressSpendingsList,
+  handleSpendingsRoute,
 }: {
-  onPressSpendingsList: () => void;
+  handleSpendingsRoute: (spendingsId: string) => void;
 }) {
   return (
     <>
-      <Button onPress={onPressSpendingsList}>Move to Spendings page</Button>
+      <SpendingsList handleSpendingsRoute={handleSpendingsRoute} />
     </>
   );
 }

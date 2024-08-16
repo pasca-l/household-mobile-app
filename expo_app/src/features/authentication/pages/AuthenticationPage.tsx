@@ -9,9 +9,9 @@ import { signOutFirebaseAuth } from "../utils/firebaseAuth";
 import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
 
 export default function AuthenticationPage({
-  onPressSpendingsList,
+  handleSpendingsRoute,
 }: {
-  onPressSpendingsList: () => void;
+  handleSpendingsRoute: (spendingsId: string) => void;
 }) {
   const [showForm, setShowForm] = useState<boolean>(false);
   const user = useFirebaseAuth();
@@ -24,7 +24,7 @@ export default function AuthenticationPage({
           <Text>{user.uid}</Text>
           <Divider style={styles.divider} />
           <AuthenticationServiceList
-            onPressSpendingsList={onPressSpendingsList}
+            handleSpendingsRoute={handleSpendingsRoute}
           />
           <Divider style={styles.divider} />
           <Button
