@@ -15,6 +15,9 @@ export default function Root() {
             params: { id: spendingsId },
           });
         }}
+        onPressVaultsList={() => {
+          router.push("/vaults/");
+        }}
       />
     </SafeAreaView>
   );
