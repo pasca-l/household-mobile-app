@@ -15,8 +15,11 @@ export default function Root() {
             params: { id: spendingsId },
           });
         }}
-        onPressVaultsList={() => {
-          router.push("/vaults/");
+        handleVaultsRoute={(vaultsId: string) => {
+          router.push({
+            pathname: "/vaults/[id]/",
+            params: { id: vaultsId },
+          });
         }}
       />
     </SafeAreaView>
