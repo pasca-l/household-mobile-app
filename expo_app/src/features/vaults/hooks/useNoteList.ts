@@ -8,8 +8,8 @@ import { Vault } from "../types/vault";
 import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 export const useNoteList = ({ id }: Vault) => {
-  const [noteList, setNoteList] = useState<Note[]>([]);
   const vaultList = useVaultList();
+  const [noteList, setNoteList] = useState<Note[]>([]);
 
   useEffect(() => {
     if (!vaultList.some((obj) => obj.id === id)) {
@@ -34,6 +34,7 @@ export const useNoteList = ({ id }: Vault) => {
                 url: doc.data().url,
                 username: doc.data().username,
                 password: doc.data().password,
+                other: doc.data().other,
               })
             )
           );

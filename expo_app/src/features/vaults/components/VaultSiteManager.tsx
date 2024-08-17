@@ -11,12 +11,11 @@ import {
 } from "react-native-paper";
 
 import { useNoteList } from "../hooks/useNoteList";
-import { Note } from "../types/note";
+import { AdditionalNote, Note } from "../types/note";
 import { Vault } from "../types/vault";
 
 export default function VaultSiteManager(vault: Vault) {
   const noteList = useNoteList(vault);
-
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   return (
@@ -56,6 +55,25 @@ export default function VaultSiteManager(vault: Vault) {
                   }}
                 />
               </View>
+              {item.other.length > 0 ? (
+                <View>
+                  <Divider style={styles.divider} />
+                  {item.other.map((other: AdditionalNote) => (
+                    <View style={styles.endIcon}>
+                      <Text>{other.content}</Text>
+                      <IconButton
+                        icon="content-copy"
+                        onPress={() => {
+                          Clipboard.setStringAsync(other.content);
+                          setShowSnackbar(true);
+                        }}
+                      />
+                    </View>
+                  ))}
+                </View>
+              ) : (
+                <></>
+              )}
             </Card.Content>
           </Card>
         ))}

@@ -7,8 +7,8 @@ import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
 
 export const useVaultList = () => {
-  const [vaultList, setVaultList] = useState<Vault[]>([]);
   const user = useFirebaseAuth();
+  const [vaultList, setVaultList] = useState<Vault[]>([]);
 
   useEffect(() => {
     (async () => {

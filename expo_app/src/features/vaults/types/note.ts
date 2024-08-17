@@ -13,6 +13,7 @@ export type Note = {
   url: string;
   username: string;
   password: string;
+  other: AdditionalNote[];
 };
 
 export type NoteFirestore = {
@@ -22,6 +23,12 @@ export type NoteFirestore = {
   url: string;
   username: string;
   password: string;
+  other: AdditionalNote[];
+};
+
+export type AdditionalNote = {
+  label: string;
+  content: string;
 };
 
 export const noteConverter = {
@@ -33,6 +40,10 @@ export const noteConverter = {
       url: note.url,
       username: note.username,
       password: note.password,
+      other: note.other.map((other: AdditionalNote) => ({
+        label: other.label,
+        content: other.content,
+      })),
     };
     return data;
   },
@@ -48,6 +59,10 @@ export const noteConverter = {
       url: data.url,
       username: data.username,
       password: data.password,
+      other: data.other.map((other: AdditionalNote) => ({
+        label: other.label,
+        content: other.content,
+      })),
     };
     return note;
   },
