@@ -1,14 +1,14 @@
 import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native";
 
-import SummaryPage from "@/features/vaults/pages/SummaryPage";
+import SiteManagerPage from "@/features/vaults/pages/SiteManagerPage";
 
-export default function VaultSummary() {
+export default function VaultSiteManager() {
   const { id } = useLocalSearchParams();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <SummaryPage id={id.toString()} />
+      <SiteManagerPage id={id.toString()} />
     </SafeAreaView>
   );
 }

@@ -1,13 +1,13 @@
 import { collection, onSnapshot, or, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-import { Vaults } from "../types/vaults";
+import { Vault } from "../types/vault";
 
 import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
 
-export const useVaultsList = () => {
-  const [vaultsList, setVaultsList] = useState<Vaults[]>([]);
+export const useVaultList = () => {
+  const [vaultList, setVaultList] = useState<Vault[]>([]);
   const user = useFirebaseAuth();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const useVaultsList = () => {
             )
           ),
           (snapshot) => {
-            setVaultsList(snapshot.docs.map((doc) => ({ id: doc.id })));
+            setVaultList(snapshot.docs.map((doc) => ({ id: doc.id })));
           }
         );
       }
@@ -31,5 +31,5 @@ export const useVaultsList = () => {
     return () => {};
   }, [user]);
 
-  return vaultsList;
+  return vaultList;
 };
