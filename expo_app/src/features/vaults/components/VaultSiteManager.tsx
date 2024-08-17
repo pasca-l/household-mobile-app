@@ -1,6 +1,14 @@
+import * as Clipboard from "expo-clipboard";
 import { useState } from "react";
 import { Linking, ScrollView, StyleSheet, View } from "react-native";
-import { Card, Divider, IconButton, Text, TextInput } from "react-native-paper";
+import {
+  Card,
+  Divider,
+  IconButton,
+  Snackbar,
+  Text,
+  TextInput,
+} from "react-native-paper";
 
 import { useNoteList } from "../hooks/useNoteList";
 import { Note } from "../types/note";
@@ -9,6 +17,8 @@ import { Vault } from "../types/vault";
 export default function VaultSiteManager(vault: Vault) {
   const noteList = useNoteList(vault);
 
+  const [showSnackbar, setShowSnackbar] = useState(false);
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -16,7 +26,7 @@ export default function VaultSiteManager(vault: Vault) {
           <Card key={item.id} style={styles.card}>
             <Card.Content>
               <View style={styles.endIcon}>
-                <Text>{item.label}</Text>
+                <Text variant="bodyLarge">{item.label}</Text>
                 <IconButton
                   mode="contained"
                   icon="open-in-new"
@@ -27,17 +37,38 @@ export default function VaultSiteManager(vault: Vault) {
               </View>
               <Divider style={styles.divider} />
               <View style={styles.endIcon}>
-                <TextInput
-                  style={styles.textInput}
-                  mode="outlined"
-                  value={item.username || ""}
+                <Text>{item.username}</Text>
+                <IconButton
+                  icon="content-copy"
+                  onPress={() => {
+                    Clipboard.setStringAsync(item.username);
+                    setShowSnackbar(true);
+                  }}
                 />
               </View>
-              <Password password={item.password || ""} />
+              <View style={styles.endIcon}>
+                <Password password={item.password || ""} />
+                <IconButton
+                  icon="content-copy"
+                  onPress={() => {
+                    Clipboard.setStringAsync(item.password);
+                    setShowSnackbar(true);
+                  }}
+                />
+              </View>
             </Card.Content>
           </Card>
         ))}
       </ScrollView>
+      <Snackbar
+        visible={showSnackbar}
+        onDismiss={() => {
+          setShowSnackbar(false);
+        }}
+        duration={750}
+      >
+        Copied!
+      </Snackbar>
     </View>
   );
 }
@@ -46,22 +77,20 @@ function Password({ password }: { password: string }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <View style={styles.endIcon}>
-      <TextInput
-        style={styles.textInput}
-        mode="outlined"
-        value={password}
-        secureTextEntry={!showPassword}
-        right={
-          <TextInput.Icon
-            icon={showPassword ? "eye" : "eye-off"}
-            onPress={() => {
-              setShowPassword(!showPassword);
-            }}
-          />
-        }
-      />
-    </View>
+    <TextInput
+      style={styles.textInput}
+      mode="outlined"
+      value={password}
+      secureTextEntry={!showPassword}
+      right={
+        <TextInput.Icon
+          icon={showPassword ? "eye" : "eye-off"}
+          onPress={() => {
+            setShowPassword(!showPassword);
+          }}
+        />
+      }
+    />
   );
 }
 
@@ -74,6 +103,7 @@ const styles = StyleSheet.create({
   },
   endIcon: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
   },
   textInput: {
