@@ -9,6 +9,7 @@ import { Spendings } from "../types/spendings";
 
 export default function SpendingsDetail(spendings: Spendings) {
   const { receiptList, isLoading } = useReceiptList(spendings);
+
   const [selectedItem, setSelectedItem] = useState<Receipt>();
   const [showItemModal, setShowItemModal] = useState<boolean>(false);
 

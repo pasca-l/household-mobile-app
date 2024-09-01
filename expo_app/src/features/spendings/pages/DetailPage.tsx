@@ -8,10 +8,10 @@ import { Spendings } from "../types/spendings";
 
 export default function DetailPage(spendings: Spendings) {
   const [showForm, setShowForm] = useState<boolean>(false);
+
   return (
     <View style={styles.container}>
       <SpendingsDetail {...spendings} />
-      {/* FIX: duplicated FAB implementation */}
       <FAB
         icon={"plus"}
         style={styles.fab}
