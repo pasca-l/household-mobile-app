@@ -10,8 +10,10 @@ import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
 
 export default function AuthenticationPage({
   handleSpendingsRoute,
+  handleVaultRoute,
 }: {
   handleSpendingsRoute: (spendingsId: string) => void;
+  handleVaultRoute: (vaultsId: string) => void;
 }) {
   const [showForm, setShowForm] = useState<boolean>(false);
   const user = useFirebaseAuth();
@@ -25,6 +27,7 @@ export default function AuthenticationPage({
           <Divider style={styles.divider} />
           <AuthenticationServiceList
             handleSpendingsRoute={handleSpendingsRoute}
+            handleVaultRoute={handleVaultRoute}
           />
           <Divider style={styles.divider} />
           <Button

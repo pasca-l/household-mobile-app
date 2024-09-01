@@ -15,6 +15,12 @@ export default function Root() {
             params: { id: spendingsId },
           });
         }}
+        handleVaultRoute={(vaultId: string) => {
+          router.push({
+            pathname: "/vaults/[id]/",
+            params: { id: vaultId },
+          });
+        }}
       />
     </SafeAreaView>
   );
