@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { MD3LightTheme, PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import QueryProvider from "@/utils/tanstack/QueryProvider";
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -28,10 +30,12 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider theme={MD3LightTheme}>
-      <SafeAreaProvider>
-        <Stack />
-      </SafeAreaProvider>
-    </PaperProvider>
+    <QueryProvider>
+      <PaperProvider theme={MD3LightTheme}>
+        <SafeAreaProvider>
+          <Stack />
+        </SafeAreaProvider>
+      </PaperProvider>
+    </QueryProvider>
   );
 }
