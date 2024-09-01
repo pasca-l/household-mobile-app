@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import { ActivityIndicator, DataTable } from "react-native-paper";
 
 import SpendingsFormModal from "./SpendingsFormModal";
@@ -13,41 +13,39 @@ export default function SpendingsDetail(spendings: Spendings) {
   const [showItemModal, setShowItemModal] = useState<boolean>(false);
 
   return (
-    <View>
+    <ScrollView>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <ScrollView>
-          <DataTable>
-            <DataTable.Header>
-              <DataTable.Title>Purchase date</DataTable.Title>
-              <DataTable.Title>Category</DataTable.Title>
-              <DataTable.Title>Value</DataTable.Title>
-            </DataTable.Header>
-            {receiptList.map((item: Receipt) => (
-              <DataTable.Row
-                key={item.id}
-                onPress={() => {
-                  setShowItemModal(true);
-                  setSelectedItem(item);
-                }}
-              >
-                <DataTable.Cell>
-                  {item.purchase_date.toISOString().split("T")[0]}
-                </DataTable.Cell>
-                <DataTable.Cell>{item.category}</DataTable.Cell>
-                <DataTable.Cell numeric>{item.value}</DataTable.Cell>
-              </DataTable.Row>
-            ))}
-          </DataTable>
-          <SpendingsFormModal
-            spendings={spendings}
-            item={selectedItem}
-            showModal={showItemModal}
-            setShowModal={setShowItemModal}
-          />
-        </ScrollView>
+        <DataTable>
+          <DataTable.Header>
+            <DataTable.Title>Purchase date</DataTable.Title>
+            <DataTable.Title>Category</DataTable.Title>
+            <DataTable.Title>Value</DataTable.Title>
+          </DataTable.Header>
+          {receiptList.map((item: Receipt) => (
+            <DataTable.Row
+              key={item.id}
+              onPress={() => {
+                setShowItemModal(true);
+                setSelectedItem(item);
+              }}
+            >
+              <DataTable.Cell>
+                {item.purchase_date.toISOString().split("T")[0]}
+              </DataTable.Cell>
+              <DataTable.Cell>{item.category}</DataTable.Cell>
+              <DataTable.Cell numeric>{item.value}</DataTable.Cell>
+            </DataTable.Row>
+          ))}
+        </DataTable>
       )}
-    </View>
+      <SpendingsFormModal
+        spendings={spendings}
+        item={selectedItem}
+        showModal={showItemModal}
+        setShowModal={setShowItemModal}
+      />
+    </ScrollView>
   );
 }
