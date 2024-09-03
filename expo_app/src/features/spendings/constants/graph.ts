@@ -16,3 +16,11 @@ export const BAR_GRAPH_SETTING = {
   barWidth: 15,
   rankNum: 4,
 };
+
+export const PIE_GRAPH_SETTING = {
+  svg: {
+    width: 300,
+    height: 300,
+  },
+  pieRadius: 120,
+};

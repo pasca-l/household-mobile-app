@@ -1,42 +1,14 @@
 import * as d3 from "d3";
-import { ScrollView, View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import { ScrollView } from "react-native";
 import { G, Rect, Svg, Text, Line } from "react-native-svg";
 
 import { BAR_GRAPH_SETTING } from "../constants/graph";
-import { useReceiptList } from "../hooks/useReceiptList";
-import { CategorySummary } from "../types/category";
-import { Spendings } from "../types/spendings";
-import { aggregateToSummary } from "../utils/aggregation";
+import { BarGraphData } from "../types/graph";
 
-export default function SpendingsGraph(spendings: Spendings) {
-  const { receiptList, isLoading } = useReceiptList(spendings);
-  const summaryList = aggregateToSummary(receiptList);
-
-  return (
-    <View>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <SpendingsBarGraph data={summaryList} />
-      )}
-    </View>
-  );
-}
-
-const SpendingsBarGraph = ({ data }: { data: CategorySummary[] }) => {
-  // process data for visualization
-  const processedData = data
-    .map((item) => ({
-      id: item.id,
-      date: item.date.toISOString().slice(2, 7), // slice up to YY-MM
-      value: Object.values(item.agg).reduce((sum, value) => sum + value, 0),
-    }))
-    .reverse();
-
+export default function SpendingsBarGraph({ data }: { data: BarGraphData[] }) {
   // get graph settings
   const setting = BAR_GRAPH_SETTING;
-  const svgWidth = setting.svg.widthInterval * processedData.length;
+  const svgWidth = setting.svg.widthInterval * data.length;
   const svgHeight = setting.svg.height;
   const graphMargin = setting.margin;
   const graphColor = setting.color;
@@ -46,12 +18,12 @@ const SpendingsBarGraph = ({ data }: { data: CategorySummary[] }) => {
   // scales
   const xScale = d3
     .scalePoint()
-    .domain(processedData.map((item) => item.date))
+    .domain(data.map((item) => item.date))
     .range([0, svgWidth - (graphMargin.left + graphMargin.right)])
     .padding(1);
   const maxYScale =
     // rounding a maximum value for y scale to the order of 10000
-    Math.ceil(d3.max(processedData, (item) => item.value)! / 10000) * 10000;
+    Math.ceil(d3.max(data, (item) => item.value)! / 10000) * 10000;
   const yScale = d3
     .scaleLinear()
     .domain([0, maxYScale])
@@ -66,7 +38,7 @@ const SpendingsBarGraph = ({ data }: { data: CategorySummary[] }) => {
           y={svgHeight - graphMargin.bottom + graphMargin.top}
         >
           {/* bars */}
-          {processedData.map((item) => (
+          {data.map((item) => (
             <Rect
               key={item.id}
               x={xScale(item.date)! - barWidth / 2}
@@ -86,7 +58,7 @@ const SpendingsBarGraph = ({ data }: { data: CategorySummary[] }) => {
             stroke={graphColor.axis}
             strokeWidth={0.5}
           />
-          {processedData.map((item) => (
+          {data.map((item) => (
             <Text
               key={item.id}
               fontSize="14"
@@ -128,4 +100,4 @@ const SpendingsBarGraph = ({ data }: { data: CategorySummary[] }) => {
       </Svg>
     </ScrollView>
   );
-};
+}
