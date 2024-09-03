@@ -1,14 +1,20 @@
 import { Stack } from "expo-router";
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Divider, FAB } from "react-native-paper";
+import { ActivityIndicator, Divider, FAB } from "react-native-paper";
 
+import SpendingsBarGraph from "../components/SpendingsBarGraph";
 import SpendingsFormModal from "../components/SpendingsFormModal";
-import SpendingsGraph from "../components/SpendingsGraph";
-import SpendingsSummary from "../components/SpendingsSummary";
+import SpendingsSummaryTable from "../components/SpendingsSummaryTable";
+import { useReceiptList } from "../hooks/useReceiptList";
+import { toBarGraphData } from "../types/category";
 import { Spendings } from "../types/spendings";
+import { aggregateToSummary } from "../utils/aggregation";
 
 export default function SummaryPage(spendings: Spendings) {
+  const { receiptList, isLoading } = useReceiptList(spendings);
+  const summaryList = aggregateToSummary(receiptList);
+
   const [showForm, setShowForm] = useState<boolean>(false);
 
   return (
@@ -18,9 +24,15 @@ export default function SummaryPage(spendings: Spendings) {
           title: spendings.id,
         }}
       />
-      <SpendingsGraph {...spendings} />
-      <Divider style={styles.divider} />
-      <SpendingsSummary {...spendings} />
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <View>
+          <SpendingsBarGraph data={toBarGraphData(summaryList)} />
+          <Divider style={styles.divider} />
+          <SpendingsSummaryTable summaryList={summaryList} />
+        </View>
+      )}
       <FAB
         icon={"plus"}
         style={styles.fab}
