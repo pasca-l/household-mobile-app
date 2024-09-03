@@ -27,11 +27,13 @@ export default function SummaryPage(spendings: Spendings) {
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <View>
-          <SpendingsBarGraph data={toBarGraphData(summaryList)} />
+        <>
+          <View>
+            <SpendingsBarGraph data={toBarGraphData(summaryList)} />
+          </View>
           <Divider style={styles.divider} />
           <SpendingsSummaryTable summaryList={summaryList} />
-        </View>
+        </>
       )}
       <FAB
         icon={"plus"}
