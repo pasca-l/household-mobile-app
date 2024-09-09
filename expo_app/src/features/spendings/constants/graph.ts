@@ -1,6 +1,6 @@
 export const BAR_GRAPH_SETTING = {
   svg: {
-    widthInterval: 60,
+    widthInterval: 65,
     height: 300,
   },
   margin: {

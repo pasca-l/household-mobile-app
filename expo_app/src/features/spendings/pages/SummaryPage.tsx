@@ -28,9 +28,7 @@ export default function SummaryPage(spendings: Spendings) {
         <ActivityIndicator />
       ) : (
         <>
-          <View>
-            <SpendingsBarGraph data={toBarGraphData(summaryList)} />
-          </View>
+          <SpendingsBarGraph data={toBarGraphData(summaryList)} />
           <Divider style={styles.divider} />
           <SpendingsSummaryTable summaryList={summaryList} />
         </>
