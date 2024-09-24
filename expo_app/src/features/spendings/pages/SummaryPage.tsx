@@ -7,9 +7,9 @@ import SpendingsBarGraph from "../components/SpendingsBarGraph";
 import SpendingsFormModal from "../components/SpendingsFormModal";
 import SpendingsSummaryTable from "../components/SpendingsSummaryTable";
 import { useReceiptList } from "../hooks/useReceiptList";
-import { toBarGraphData } from "../types/category";
 import { Spendings } from "../types/spendings";
 import { aggregateToSummary } from "../utils/aggregation";
+import { toBarGraphData } from "../utils/conversion";
 
 export default function SummaryPage(spendings: Spendings) {
   const { receiptList, isLoading } = useReceiptList(spendings);
