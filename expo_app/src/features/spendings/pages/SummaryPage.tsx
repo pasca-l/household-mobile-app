@@ -25,7 +25,7 @@ export default function SummaryPage(spendings: Spendings) {
         }}
       />
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator style={styles.loading} />
       ) : (
         <>
           <SpendingsBarGraph data={toBarGraphData(summaryList)} />
@@ -52,13 +52,14 @@ export default function SummaryPage(spendings: Spendings) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   fab: {
     position: "absolute",
     bottom: 16,
     right: 16,
+  },
+  loading: {
+    height: "100%",
   },
   divider: {
     margin: 10,
