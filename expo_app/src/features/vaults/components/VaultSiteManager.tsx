@@ -63,7 +63,7 @@ export default function VaultSiteManager(vault: Vault) {
                   <View>
                     <Divider style={styles.divider} />
                     {item.other.map((other: AdditionalNote) => (
-                      <View id={other.label} style={styles.endIcon}>
+                      <View key={other.label} style={styles.endIcon}>
                         <Text>{other.content}</Text>
                         <IconButton
                           icon="content-copy"
