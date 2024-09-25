@@ -53,7 +53,7 @@ export default function SpendingsFormModal({
 
       return () => clearTimeout(timer);
     }
-  }, [item]);
+  }, [item, showModal]);
 
   return (
     <Portal>

@@ -1,13 +1,20 @@
 import { Stack } from "expo-router";
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { FAB } from "react-native-paper";
+import { ActivityIndicator, Divider, FAB } from "react-native-paper";
 
+import SpendingsBarGraph from "../components/SpendingsBarGraph";
 import SpendingsFormModal from "../components/SpendingsFormModal";
-import SpendingsSummary from "../components/SpendingsSummary";
+import SpendingsSummaryTable from "../components/SpendingsSummaryTable";
+import { useReceiptList } from "../hooks/useReceiptList";
 import { Spendings } from "../types/spendings";
+import { aggregateToSummary } from "../utils/aggregation";
+import { toBarGraphData } from "../utils/conversion";
 
 export default function SummaryPage(spendings: Spendings) {
+  const { receiptList, isLoading } = useReceiptList(spendings);
+  const summaryList = aggregateToSummary(receiptList);
+
   const [showForm, setShowForm] = useState<boolean>(false);
 
   return (
@@ -17,7 +24,15 @@ export default function SummaryPage(spendings: Spendings) {
           title: spendings.id,
         }}
       />
-      <SpendingsSummary {...spendings} />
+      {isLoading ? (
+        <ActivityIndicator style={styles.loading} />
+      ) : (
+        <>
+          <SpendingsBarGraph data={toBarGraphData(summaryList)} />
+          <Divider style={styles.divider} />
+          <SpendingsSummaryTable summaryList={summaryList} />
+        </>
+      )}
       <FAB
         icon={"plus"}
         style={styles.fab}
@@ -37,12 +52,16 @@ export default function SummaryPage(spendings: Spendings) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   fab: {
     position: "absolute",
     bottom: 16,
     right: 16,
+  },
+  loading: {
+    height: "100%",
+  },
+  divider: {
+    margin: 10,
   },
 });

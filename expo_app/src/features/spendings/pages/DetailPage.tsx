@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { FAB } from "react-native-paper";
+import { ActivityIndicator, FAB } from "react-native-paper";
 
-import SpendingsDetail from "../components/SpendingsDetail";
+import SpendingsDetailTable from "../components/SpendingsDetailTable";
 import SpendingsFormModal from "../components/SpendingsFormModal";
+import { useReceiptList } from "../hooks/useReceiptList";
 import { Spendings } from "../types/spendings";
 
 export default function DetailPage(spendings: Spendings) {
+  const { receiptList, isLoading } = useReceiptList(spendings);
+
   const [showForm, setShowForm] = useState<boolean>(false);
+
   return (
     <View style={styles.container}>
-      <SpendingsDetail {...spendings} />
-      {/* FIX: duplicated FAB implementation */}
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <SpendingsDetailTable spendings={spendings} receiptList={receiptList} />
+      )}
       <FAB
         icon={"plus"}
         style={styles.fab}
