@@ -15,7 +15,7 @@ export default function DetailPage(spendings: Spendings) {
   return (
     <View style={styles.container}>
       {isLoading ? (
-        <ActivityIndicator />
+        <ActivityIndicator style={styles.loading} />
       ) : (
         <SpendingsDetailTable spendings={spendings} receiptList={receiptList} />
       )}
@@ -38,6 +38,9 @@ export default function DetailPage(spendings: Spendings) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  loading: {
+    height: "100%",
   },
   fab: {
     position: "absolute",

@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  loading: {
+    height: "100%",
+  },
   fab: {
     position: "absolute",
     bottom: 16,
     right: 16,
-  },
-  loading: {
-    height: "100%",
   },
   divider: {
     margin: 10,
