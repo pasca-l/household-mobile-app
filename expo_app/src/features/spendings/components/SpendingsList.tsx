@@ -16,7 +16,7 @@ export default function SpendingsList({
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        spendingsList!.map((item: Spendings) => (
+        spendingsList.map((item: Spendings) => (
           <List.Item
             key={item.id}
             title={item.id}

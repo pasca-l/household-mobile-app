@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { collection, onSnapshot, or, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
 
 import { Vault } from "../types/vault";
 
@@ -8,12 +8,17 @@ import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
 
 export const useVaultList = () => {
   const user = useFirebaseAuth();
-  const [vaultList, setVaultList] = useState<Vault[]>([]);
 
-  useEffect(() => {
-    (async () => {
-      if (user) {
-        onSnapshot(
+  const { data, isLoading } = useQuery({
+    queryKey: ["fetchVaultList", user?.uid],
+    queryFn: () =>
+      new Promise<Vault[]>((resolve, reject) => {
+        if (!user) {
+          resolve([]);
+          return;
+        }
+
+        const unsubscribe = onSnapshot(
           query(
             collection(FIRESTORE, "vaults"),
             or(
@@ -22,14 +27,15 @@ export const useVaultList = () => {
             )
           ),
           (snapshot) => {
-            setVaultList(snapshot.docs.map((doc) => ({ id: doc.id })));
-          }
+            resolve(snapshot.docs.map((doc) => ({ id: doc.id })));
+          },
+          reject
         );
-      }
-    })();
 
-    return () => {};
-  }, [user]);
+        return () => unsubscribe();
+      }),
+    enabled: !!user,
+  });
 
-  return vaultList;
+  return { vaultList: data ?? [], isLoading };
 };
