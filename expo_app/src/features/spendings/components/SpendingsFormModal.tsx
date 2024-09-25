@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, TextInput as NativeTextInput } from "react-native";
+import { StyleSheet, TextInput as NativeTextInput, View } from "react-native";
 import {
   TextInput,
   Button,
-  List,
   Portal,
   Dialog,
   Text,
+  Chip,
+  Divider,
 } from "react-native-paper";
 
 import { category } from "../constants/category";
@@ -37,7 +38,6 @@ export default function SpendingsFormModal({
   );
   const [inputValue, setInputValue] = useState<string>("");
   const [pickedCategory, setPickedCategory] = useState<Category>(categories[0]);
-  const [expandAccordion, setExpandAccordion] = useState<boolean>(false);
   const [disableDelete, setDisableDelete] = useState<boolean>(true);
 
   useEffect(() => {
@@ -66,14 +66,14 @@ export default function SpendingsFormModal({
         <Dialog.Content style={styles.dialog}>
           {item ? <Text>Item {item.id}</Text> : <></>}
           <TextInput
-            mode="flat"
+            mode="outlined"
             label="Purchase date"
             value={inputDate}
             onChangeText={setInputDate}
             placeholder="YYYY-MM-DD"
           />
           <TextInput
-            mode="flat"
+            mode="outlined"
             label="Item value"
             value={inputValue}
             onChangeText={setInputValue}
@@ -81,28 +81,20 @@ export default function SpendingsFormModal({
               <NativeTextInput inputMode="numeric" {...props} />
             )}
           />
-          <List.Section title="category">
-            <List.Accordion
-              title={pickedCategory}
-              expanded={expandAccordion}
-              onPress={() => {
-                setExpandAccordion(!expandAccordion);
-              }}
-            >
-              {categories.map((c: Category) => {
-                return (
-                  <List.Item
-                    key={c}
-                    title={c}
-                    onPress={() => {
-                      setPickedCategory(c);
-                      setExpandAccordion(!expandAccordion);
-                    }}
-                  />
-                );
-              })}
-            </List.Accordion>
-          </List.Section>
+          <Divider style={styles.divider} />
+          <View style={styles.chips}>
+            {categories.map((c: Category) => (
+              <Chip
+                selected={pickedCategory === c}
+                onPress={() => {
+                  setPickedCategory(c);
+                }}
+              >
+                {c}
+              </Chip>
+            ))}
+          </View>
+          <Divider style={styles.divider} />
 
           {item ? (
             <>
@@ -161,5 +153,14 @@ export default function SpendingsFormModal({
 const styles = StyleSheet.create({
   dialog: {
     gap: 3,
+  },
+  divider: {
+    margin: 10,
+  },
+  chips: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 4,
+    margin: 5,
   },
 });
