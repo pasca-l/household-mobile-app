@@ -10,7 +10,7 @@ import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 export const useReceiptList = ({ id }: Spendings) => {
   const { spendingsList } = useSpendingsList();
 
-  const { data, isLoading } = useQuery({
+  const { data, refetch, isLoading } = useQuery({
     queryKey: ["fetchReceiptList", id],
     queryFn: () =>
       new Promise<Receipt[]>((resolve, reject) => {
@@ -51,5 +51,5 @@ export const useReceiptList = ({ id }: Spendings) => {
     enabled: spendingsList.some((obj) => obj.id === id),
   });
 
-  return { receiptList: data ?? [], isLoading };
+  return { receiptList: data ?? [], refetch, isLoading };
 };

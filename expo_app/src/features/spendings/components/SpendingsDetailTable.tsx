@@ -9,9 +9,11 @@ import { Spendings } from "../types/spendings";
 export default function SpendingsDetailTable({
   spendings,
   receiptList,
+  refetch,
 }: {
   spendings: Spendings;
   receiptList: Receipt[];
+  refetch: () => void;
 }) {
   const [selectedItem, setSelectedItem] = useState<Receipt>();
   const [showItemModal, setShowItemModal] = useState<boolean>(false);
@@ -45,6 +47,7 @@ export default function SpendingsDetailTable({
         item={selectedItem}
         showModal={showItemModal}
         setShowModal={setShowItemModal}
+        refetch={refetch}
       />
     </ScrollView>
   );

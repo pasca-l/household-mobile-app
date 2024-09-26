@@ -8,7 +8,7 @@ import { useReceiptList } from "../hooks/useReceiptList";
 import { Spendings } from "../types/spendings";
 
 export default function DetailPage(spendings: Spendings) {
-  const { receiptList, isLoading } = useReceiptList(spendings);
+  const { receiptList, refetch, isLoading } = useReceiptList(spendings);
 
   const [showForm, setShowForm] = useState<boolean>(false);
 
@@ -17,7 +17,11 @@ export default function DetailPage(spendings: Spendings) {
       {isLoading ? (
         <ActivityIndicator style={styles.loading} />
       ) : (
-        <SpendingsDetailTable spendings={spendings} receiptList={receiptList} />
+        <SpendingsDetailTable
+          spendings={spendings}
+          receiptList={receiptList}
+          refetch={refetch}
+        />
       )}
       <FAB
         icon={"plus"}
@@ -30,6 +34,7 @@ export default function DetailPage(spendings: Spendings) {
         spendings={spendings}
         showModal={showForm}
         setShowModal={setShowForm}
+        refetch={refetch}
       />
     </View>
   );

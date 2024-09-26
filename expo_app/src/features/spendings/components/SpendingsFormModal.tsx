@@ -8,6 +8,7 @@ import {
   Text,
   Chip,
   Divider,
+  Snackbar,
 } from "react-native-paper";
 
 import { category } from "../constants/category";
@@ -25,11 +26,13 @@ export default function SpendingsFormModal({
   item,
   showModal,
   setShowModal,
+  refetch,
 }: {
   spendings: Spendings;
   item?: Receipt | undefined;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
+  refetch: () => void;
 }) {
   const categories: Category[] = Object.values(category);
 
@@ -39,6 +42,8 @@ export default function SpendingsFormModal({
   const [inputValue, setInputValue] = useState<string>("");
   const [pickedCategory, setPickedCategory] = useState<Category>(categories[0]);
   const [disableDelete, setDisableDelete] = useState<boolean>(true);
+  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+  const [snackbarMsg, setSnackbarMsg] = useState<string>("");
 
   useEffect(() => {
     if (item) {
@@ -110,6 +115,9 @@ export default function SpendingsFormModal({
                     purchase_date: new Date(Date.parse(inputDate)),
                   });
                   setShowModal(false);
+                  setSnackbarMsg("Updated receipt!");
+                  setShowSnackbar(true);
+                  refetch();
                 }}
               >
                 Update receipt
@@ -119,6 +127,9 @@ export default function SpendingsFormModal({
                 onPress={() => {
                   deleteFirestoreDoc(spendings.id, item);
                   setShowModal(false);
+                  setSnackbarMsg("Deleted receipt!");
+                  setShowSnackbar(true);
+                  refetch();
                 }}
                 disabled={disableDelete}
               >
@@ -139,6 +150,9 @@ export default function SpendingsFormModal({
                   purchase_date: new Date(Date.parse(inputDate)),
                 });
                 setShowModal(false);
+                setSnackbarMsg("Added receipt!");
+                setShowSnackbar(true);
+                refetch();
               }}
             >
               Add receipt
@@ -146,6 +160,15 @@ export default function SpendingsFormModal({
           )}
         </Dialog.Content>
       </Dialog>
+      <Snackbar
+        visible={showSnackbar}
+        onDismiss={() => {
+          setShowSnackbar(false);
+        }}
+        duration={750}
+      >
+        {snackbarMsg}
+      </Snackbar>
     </Portal>
   );
 }
