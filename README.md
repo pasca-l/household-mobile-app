@@ -36,7 +36,11 @@ $ make app
 
 ## Functions
 - Household account book
-- Calendar (schedule)
+- Password manager (vaults)
+- Deadline keeper?
+  - For warranty
+- Milestones keeper? (todo list)
+- Menu for a week?
+- Anniversary reminder?
 - Image folder?
-  - Keeping receipts
   - Sharing documents
