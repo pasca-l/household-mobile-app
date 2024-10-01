@@ -36,14 +36,14 @@ export default function SpendingsFormModal({
 }) {
   const categories: Category[] = Object.values(category);
 
-  const [inputDate, setInputDate] = useState<string>(
+  const [inputDate, setInputDate] = useState(
     new Date().toISOString().split("T")[0]
   );
-  const [inputValue, setInputValue] = useState<string>("");
+  const [inputValue, setInputValue] = useState("");
   const [pickedCategory, setPickedCategory] = useState<Category>(categories[0]);
-  const [disableDelete, setDisableDelete] = useState<boolean>(true);
-  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
-  const [snackbarMsg, setSnackbarMsg] = useState<string>("");
+  const [disableDelete, setDisableDelete] = useState(true);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState("");
 
   useEffect(() => {
     if (item) {
@@ -90,6 +90,7 @@ export default function SpendingsFormModal({
           <View style={styles.chips}>
             {categories.map((c: Category) => (
               <Chip
+                key={c}
                 selected={pickedCategory === c}
                 onPress={() => {
                   setPickedCategory(c);

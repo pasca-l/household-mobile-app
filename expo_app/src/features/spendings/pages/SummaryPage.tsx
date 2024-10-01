@@ -15,7 +15,7 @@ export default function SummaryPage(spendings: Spendings) {
   const { receiptList, isLoading } = useReceiptList(spendings);
   const summaryList = aggregateToSummary(receiptList);
 
-  const [showForm, setShowForm] = useState<boolean>(false);
+  const [showForm, setShowForm] = useState(false);
 
   return (
     <View style={styles.container}>

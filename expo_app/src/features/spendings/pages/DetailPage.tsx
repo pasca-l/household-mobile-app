@@ -10,7 +10,7 @@ import { Spendings } from "../types/spendings";
 export default function DetailPage(spendings: Spendings) {
   const { receiptList, refetch, isLoading } = useReceiptList(spendings);
 
-  const [showForm, setShowForm] = useState<boolean>(false);
+  const [showForm, setShowForm] = useState(false);
 
   return (
     <View style={styles.container}>

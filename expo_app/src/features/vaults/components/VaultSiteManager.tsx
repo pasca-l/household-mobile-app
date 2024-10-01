@@ -17,7 +17,7 @@ import { Vault } from "../types/vault";
 
 export default function VaultSiteManager(vault: Vault) {
   const { noteList, isLoading } = useNoteList(vault);
-  const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   return (
     <View style={styles.container}>

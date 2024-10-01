@@ -16,7 +16,7 @@ export default function SpendingsDetailTable({
   refetch: () => void;
 }) {
   const [selectedItem, setSelectedItem] = useState<Receipt>();
-  const [showItemModal, setShowItemModal] = useState<boolean>(false);
+  const [showItemModal, setShowItemModal] = useState(false);
 
   return (
     <ScrollView>
