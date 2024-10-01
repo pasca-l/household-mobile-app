@@ -12,7 +12,7 @@ import { aggregateToSummary } from "../utils/aggregation";
 import { toBarGraphData } from "../utils/conversion";
 
 export default function SummaryPage(spendings: Spendings) {
-  const { receiptList, isLoading } = useReceiptList(spendings);
+  const { receiptList, refetch, isLoading } = useReceiptList(spendings);
   const summaryList = aggregateToSummary(receiptList);
 
   const [showForm, setShowForm] = useState(false);
@@ -44,6 +44,7 @@ export default function SummaryPage(spendings: Spendings) {
         spendings={spendings}
         showModal={showForm}
         setShowModal={setShowForm}
+        refetch={refetch}
       />
     </View>
   );
