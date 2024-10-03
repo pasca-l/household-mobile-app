@@ -3,18 +3,17 @@ import { ScrollView } from "react-native";
 import { DataTable } from "react-native-paper";
 
 import SpendingsFormModal from "./SpendingsFormModal";
+import { useReceiptList } from "../hooks/useReceiptList";
 import { Receipt } from "../types/receipt";
 import { Spendings } from "../types/spendings";
 
 export default function SpendingsDetailTable({
   spendings,
-  receiptList,
-  refetch,
 }: {
   spendings: Spendings;
-  receiptList: Receipt[];
-  refetch: () => void;
 }) {
+  const { receiptList } = useReceiptList(spendings);
+
   const [selectedItem, setSelectedItem] = useState<Receipt>();
   const [showItemModal, setShowItemModal] = useState(false);
 
@@ -47,7 +46,6 @@ export default function SpendingsDetailTable({
         item={selectedItem}
         showModal={showItemModal}
         setShowModal={setShowItemModal}
-        refetch={refetch}
       />
     </ScrollView>
   );

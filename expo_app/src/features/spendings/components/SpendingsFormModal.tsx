@@ -12,6 +12,7 @@ import {
 } from "react-native-paper";
 
 import { category } from "../constants/category";
+import { useReceiptList } from "../hooks/useReceiptList";
 import { Category } from "../types/category";
 import { Receipt } from "../types/receipt";
 import { Spendings } from "../types/spendings";
@@ -26,14 +27,14 @@ export default function SpendingsFormModal({
   item,
   showModal,
   setShowModal,
-  refetch,
 }: {
   spendings: Spendings;
   item?: Receipt | undefined;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
-  refetch: () => void;
 }) {
+  const { refetch } = useReceiptList(spendings);
+
   const categories: Category[] = Object.values(category);
 
   const [inputDate, setInputDate] = useState(

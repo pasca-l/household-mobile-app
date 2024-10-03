@@ -8,12 +8,9 @@ import SpendingsFormModal from "../components/SpendingsFormModal";
 import SpendingsSummaryTable from "../components/SpendingsSummaryTable";
 import { useReceiptList } from "../hooks/useReceiptList";
 import { Spendings } from "../types/spendings";
-import { aggregateToSummary } from "../utils/aggregation";
-import { toBarGraphData } from "../utils/conversion";
 
 export default function SummaryPage(spendings: Spendings) {
-  const { receiptList, refetch, isLoading } = useReceiptList(spendings);
-  const summaryList = aggregateToSummary(receiptList);
+  const { isLoading } = useReceiptList(spendings);
 
   const [showForm, setShowForm] = useState(false);
 
@@ -28,9 +25,9 @@ export default function SummaryPage(spendings: Spendings) {
         <ActivityIndicator style={styles.loading} />
       ) : (
         <>
-          <SpendingsBarGraph data={toBarGraphData(summaryList)} />
+          <SpendingsBarGraph spendings={spendings} />
           <Divider style={styles.divider} />
-          <SpendingsSummaryTable summaryList={summaryList} />
+          <SpendingsSummaryTable spendings={spendings} />
         </>
       )}
       <FAB
@@ -44,7 +41,6 @@ export default function SummaryPage(spendings: Spendings) {
         spendings={spendings}
         showModal={showForm}
         setShowModal={setShowForm}
-        refetch={refetch}
       />
     </View>
   );

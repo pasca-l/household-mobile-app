@@ -2,13 +2,19 @@ import { ScrollView, StyleSheet } from "react-native";
 import { DataTable } from "react-native-paper";
 
 import { category } from "../constants/category";
+import { useReceiptList } from "../hooks/useReceiptList";
 import { Category, CategorySummary } from "../types/category";
+import { Spendings } from "../types/spendings";
+import { aggregateToSummary } from "../utils/aggregation";
 
 export default function SpendingsSummaryTable({
-  summaryList,
+  spendings,
 }: {
-  summaryList: CategorySummary[];
+  spendings: Spendings;
 }) {
+  const { receiptList } = useReceiptList(spendings);
+  const summaryList = aggregateToSummary(receiptList);
+
   return (
     <ScrollView>
       <ScrollView horizontal={true}>
@@ -29,7 +35,7 @@ export default function SpendingsSummaryTable({
               </DataTable.Cell>
               {category.map((c: Category) => (
                 <DataTable.Cell key={c} style={{ flex: 1 }}>
-                  {item.agg[c] !== undefined ? item.agg[c] : "-"}
+                  {item.agg[c] ?? "-"}
                 </DataTable.Cell>
               ))}
             </DataTable.Row>

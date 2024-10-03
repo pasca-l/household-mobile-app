@@ -4,9 +4,20 @@ import { ScrollView, View } from "react-native";
 import { G, Rect, Svg, Text, Line } from "react-native-svg";
 
 import { BAR_GRAPH_SETTING } from "../constants/graph";
-import { BarGraphData } from "../types/graph";
+import { useReceiptList } from "../hooks/useReceiptList";
+import { Spendings } from "../types/spendings";
+import { aggregateToSummary } from "../utils/aggregation";
+import { toBarGraphData } from "../utils/conversion";
 
-export default function SpendingsBarGraph({ data }: { data: BarGraphData[] }) {
+export default function SpendingsBarGraph({
+  spendings,
+}: {
+  spendings: Spendings;
+}) {
+  const { receiptList } = useReceiptList(spendings);
+  const summaryList = aggregateToSummary(receiptList);
+  const data = toBarGraphData(summaryList);
+
   // get graph settings
   const setting = BAR_GRAPH_SETTING;
   const svgWidth = setting.svg.widthInterval * data.length;
