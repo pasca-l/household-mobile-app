@@ -13,10 +13,10 @@ import {
 
 import { useNoteList } from "../hooks/useNoteList";
 import { AdditionalNote, Note } from "../types/note";
-import { Vault } from "../types/vault";
 
-export default function VaultSiteManager(vault: Vault) {
-  const { noteList, isLoading } = useNoteList(vault);
+export default function VaultSiteManager() {
+  const { noteList, isLoading } = useNoteList();
+
   const [showSnackbar, setShowSnackbar] = useState(false);
 
   return (

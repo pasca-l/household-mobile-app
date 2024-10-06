@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { collection, onSnapshot, query } from "firebase/firestore";
 
 import { useVaultList } from "./useVaultList";
+import { useVaultContext } from "../contexts/VaultContext";
 import { Note, noteConverter } from "../types/note";
-import { Vault } from "../types/vault";
 
 import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
-export const useNoteList = ({ id }: Vault) => {
+export const useNoteList = () => {
+  const { id } = useVaultContext();
   const { vaultList } = useVaultList();
 
   const { data, isLoading } = useQuery({
