@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, useContext } from "react";
 
 import { Spendings } from "../types/spendings";
 
@@ -8,7 +8,7 @@ export const SpendingsProvider = ({
   children,
   spendings,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   spendings: Spendings;
 }) => {
   return (
