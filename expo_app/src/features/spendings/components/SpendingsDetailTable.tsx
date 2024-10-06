@@ -5,14 +5,9 @@ import { DataTable } from "react-native-paper";
 import SpendingsFormModal from "./SpendingsFormModal";
 import { useReceiptList } from "../hooks/useReceiptList";
 import { Receipt } from "../types/receipt";
-import { Spendings } from "../types/spendings";
 
-export default function SpendingsDetailTable({
-  spendings,
-}: {
-  spendings: Spendings;
-}) {
-  const { receiptList } = useReceiptList(spendings);
+export default function SpendingsDetailTable() {
+  const { receiptList } = useReceiptList();
 
   const [selectedItem, setSelectedItem] = useState<Receipt>();
   const [showItemModal, setShowItemModal] = useState(false);
@@ -42,7 +37,6 @@ export default function SpendingsDetailTable({
         ))}
       </DataTable>
       <SpendingsFormModal
-        spendings={spendings}
         item={selectedItem}
         showModal={showItemModal}
         setShowModal={setShowItemModal}

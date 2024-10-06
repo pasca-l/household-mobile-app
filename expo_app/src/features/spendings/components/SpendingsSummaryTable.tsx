@@ -4,15 +4,10 @@ import { DataTable } from "react-native-paper";
 import { category } from "../constants/category";
 import { useReceiptList } from "../hooks/useReceiptList";
 import { Category, CategorySummary } from "../types/category";
-import { Spendings } from "../types/spendings";
 import { aggregateToSummary } from "../utils/aggregation";
 
-export default function SpendingsSummaryTable({
-  spendings,
-}: {
-  spendings: Spendings;
-}) {
-  const { receiptList } = useReceiptList(spendings);
+export default function SpendingsSummaryTable() {
+  const { receiptList } = useReceiptList();
   const summaryList = aggregateToSummary(receiptList);
 
   return (

@@ -5,10 +5,9 @@ import { ActivityIndicator, FAB } from "react-native-paper";
 import SpendingsDetailTable from "../components/SpendingsDetailTable";
 import SpendingsFormModal from "../components/SpendingsFormModal";
 import { useReceiptList } from "../hooks/useReceiptList";
-import { Spendings } from "../types/spendings";
 
-export default function DetailPage(spendings: Spendings) {
-  const { isLoading } = useReceiptList(spendings);
+export default function DetailPage() {
+  const { isLoading } = useReceiptList();
 
   const [showForm, setShowForm] = useState(false);
 
@@ -17,7 +16,7 @@ export default function DetailPage(spendings: Spendings) {
       {isLoading ? (
         <ActivityIndicator style={styles.loading} />
       ) : (
-        <SpendingsDetailTable spendings={spendings} />
+        <SpendingsDetailTable />
       )}
       <FAB
         icon={"plus"}
@@ -26,11 +25,7 @@ export default function DetailPage(spendings: Spendings) {
           setShowForm(true);
         }}
       />
-      <SpendingsFormModal
-        spendings={spendings}
-        showModal={showForm}
-        setShowModal={setShowForm}
-      />
+      <SpendingsFormModal showModal={showForm} setShowModal={setShowForm} />
     </View>
   );
 }

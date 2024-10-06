@@ -5,16 +5,11 @@ import { G, Rect, Svg, Text, Line } from "react-native-svg";
 
 import { BAR_GRAPH_SETTING } from "../constants/graph";
 import { useReceiptList } from "../hooks/useReceiptList";
-import { Spendings } from "../types/spendings";
 import { aggregateToSummary } from "../utils/aggregation";
 import { toBarGraphData } from "../utils/conversion";
 
-export default function SpendingsBarGraph({
-  spendings,
-}: {
-  spendings: Spendings;
-}) {
-  const { receiptList } = useReceiptList(spendings);
+export default function SpendingsBarGraph() {
+  const { receiptList } = useReceiptList();
   const summaryList = aggregateToSummary(receiptList);
   const data = toBarGraphData(summaryList);
 

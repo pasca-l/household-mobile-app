@@ -10,7 +10,7 @@ export default function SpendingsDetails() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Text>Details {id}</Text>
-      <DetailPage id={id.toString()} />
+      <DetailPage />
     </SafeAreaView>
   );
 }

@@ -6,11 +6,12 @@ import { ActivityIndicator, Divider, FAB } from "react-native-paper";
 import SpendingsBarGraph from "../components/SpendingsBarGraph";
 import SpendingsFormModal from "../components/SpendingsFormModal";
 import SpendingsSummaryTable from "../components/SpendingsSummaryTable";
+import { useSpendingsContext } from "../contexts/SpendingsContext";
 import { useReceiptList } from "../hooks/useReceiptList";
-import { Spendings } from "../types/spendings";
 
-export default function SummaryPage(spendings: Spendings) {
-  const { isLoading } = useReceiptList(spendings);
+export default function SummaryPage() {
+  const spendings = useSpendingsContext();
+  const { isLoading } = useReceiptList();
 
   const [showForm, setShowForm] = useState(false);
 
@@ -25,9 +26,9 @@ export default function SummaryPage(spendings: Spendings) {
         <ActivityIndicator style={styles.loading} />
       ) : (
         <>
-          <SpendingsBarGraph spendings={spendings} />
+          <SpendingsBarGraph />
           <Divider style={styles.divider} />
-          <SpendingsSummaryTable spendings={spendings} />
+          <SpendingsSummaryTable />
         </>
       )}
       <FAB
@@ -37,11 +38,7 @@ export default function SummaryPage(spendings: Spendings) {
           setShowForm(true);
         }}
       />
-      <SpendingsFormModal
-        spendings={spendings}
-        showModal={showForm}
-        setShowModal={setShowForm}
-      />
+      <SpendingsFormModal showModal={showForm} setShowModal={setShowForm} />
     </View>
   );
 }

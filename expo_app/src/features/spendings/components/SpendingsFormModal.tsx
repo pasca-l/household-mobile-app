@@ -12,10 +12,10 @@ import {
 } from "react-native-paper";
 
 import { category } from "../constants/category";
+import { useSpendingsContext } from "../contexts/SpendingsContext";
 import { useReceiptList } from "../hooks/useReceiptList";
 import { Category } from "../types/category";
 import { Receipt } from "../types/receipt";
-import { Spendings } from "../types/spendings";
 import {
   addFirestoreDoc,
   deleteFirestoreDoc,
@@ -23,17 +23,16 @@ import {
 } from "../utils/firestoreCrud";
 
 export default function SpendingsFormModal({
-  spendings,
   item,
   showModal,
   setShowModal,
 }: {
-  spendings: Spendings;
   item?: Receipt | undefined;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
 }) {
-  const { refetch } = useReceiptList(spendings);
+  const { id: spendingsId } = useSpendingsContext();
+  const { refetch } = useReceiptList();
 
   const categories: Category[] = Object.values(category);
 
@@ -108,7 +107,7 @@ export default function SpendingsFormModal({
               <Button
                 mode="outlined"
                 onPress={async () => {
-                  updateFirestoreDoc(spendings.id, {
+                  updateFirestoreDoc(spendingsId, {
                     id: item.id,
                     created_at: item.created_at,
                     updated_at: new Date(),
@@ -127,7 +126,7 @@ export default function SpendingsFormModal({
               <Button
                 mode="outlined"
                 onPress={() => {
-                  deleteFirestoreDoc(spendings.id, item);
+                  deleteFirestoreDoc(spendingsId, item);
                   setShowModal(false);
                   setSnackbarMsg("Deleted receipt!");
                   setShowSnackbar(true);
@@ -144,7 +143,7 @@ export default function SpendingsFormModal({
               onPress={async () => {
                 setInputValue("");
                 setPickedCategory(categories[0]);
-                addFirestoreDoc(spendings.id, {
+                addFirestoreDoc(spendingsId, {
                   created_at: new Date(),
                   updated_at: new Date(),
                   category: pickedCategory,
