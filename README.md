@@ -1,5 +1,5 @@
-# Household App
-This product holds an application to keep track of household activities and records (eg. schedules, spendings, ...)
+# Household Mobile App
+This product holds an mobile application to keep track of household activities and records (eg. spendings, vaults, ...)
 
 ## Screenshots
 
