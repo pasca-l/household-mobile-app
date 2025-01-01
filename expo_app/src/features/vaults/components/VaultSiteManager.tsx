@@ -34,6 +34,8 @@ export default function VaultSiteManager() {
                     mode="contained"
                     icon="open-in-new"
                     onPress={() => {
+                      // when running on Expo Go,
+                      // the device should allow "Local Network" to open urls
                       Linking.openURL(item.url);
                     }}
                   />
