@@ -22,7 +22,7 @@ $ docker compose up -d && docker compose exec app bash
 
 2. Run application.
 ```shell
-(container) $ yarn install && yarn start
+(container) $ npm install && npm start
 ```
 - To access on web browser, access [localhost](http://localhost:8081/).
   - To use a tunnel URL, use option `--tunnel`.
@@ -37,10 +37,13 @@ $ make app
 ## Functions
 - Household account book
 - Password manager (vaults)
-- Deadline keeper?
+
+## Possibilities
+- Add Deadline keeper?
   - For warranty
-- Milestones keeper? (todo list)
-- Menu for a week?
-- Anniversary reminder?
-- Image folder?
+- Add Milestones keeper? (todo list)
+- Add Menu for a week?
+- Add Anniversary reminder?
+- Add Image folder?
   - Sharing documents
+- Use gluestack-ui

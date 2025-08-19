@@ -16,4 +16,4 @@ services:
       - 8081:8081
       - 9005:9005
     # command: >
-    #   sh -c "yarn start --tunnel"
+    #   sh -c "npm start -- --tunnel"

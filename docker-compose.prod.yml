@@ -18,7 +18,7 @@ services:
     ports:
       - 8081:8081
     command: >
-      sh -c "yarn start"
+      sh -c "npm start"
 
 volumes:
   node_modules:

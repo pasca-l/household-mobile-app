@@ -5,4 +5,4 @@ WORKDIR /home/local/
 RUN apt-get update && apt-get upgrade -y
 
 COPY expo_app/ /home/local/
-RUN yarn install
+RUN npm install
