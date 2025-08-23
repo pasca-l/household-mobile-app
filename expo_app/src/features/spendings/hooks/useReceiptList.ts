@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
+import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
+
 import { useSpendingsList } from "./useSpendingsList";
 import { useSpendingsContext } from "../contexts/SpendingsContext";
 import { Receipt, receiptConverter } from "../types/receipt";
 
-import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 export const useReceiptList = () => {
   const { id } = useSpendingsContext();

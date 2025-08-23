@@ -2,11 +2,11 @@ import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Button, Divider, FAB, Text } from "react-native-paper";
 
+import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
+
 import AuthenticationFormModal from "../components/AuthenticationFormModal";
 import AuthenticationServiceList from "../components/AuthenticationServiceList";
 import { signOutFirebaseAuth } from "../utils/firebaseAuth";
-
-import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
 
 export default function AuthenticationPage({
   handleSpendingsRoute,

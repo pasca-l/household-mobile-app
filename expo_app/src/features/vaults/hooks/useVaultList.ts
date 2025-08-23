@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { collection, onSnapshot, or, query, where } from "firebase/firestore";
 
-import { Vault } from "../types/vault";
 
 import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
+
+import { Vault } from "../types/vault";
 
 export const useVaultList = () => {
   const user = useFirebaseAuth();

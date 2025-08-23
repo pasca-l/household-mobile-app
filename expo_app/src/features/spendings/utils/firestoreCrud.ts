@@ -6,9 +6,10 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
+import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
+
 import { Receipt, receiptConverter } from "../types/receipt";
 
-import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 export const addFirestoreDoc = async (
   spendingsId: string,

@@ -1,7 +1,5 @@
 import {
-  DocumentData,
   QueryDocumentSnapshot,
-  SnapshotOptions,
   Timestamp,
 } from "firebase/firestore";
 
@@ -25,7 +23,7 @@ export type ReceiptFirestore = {
 };
 
 export const receiptConverter = {
-  toFirestore(receipt: Receipt): DocumentData {
+  toFirestore(receipt: Receipt): ReceiptFirestore {
     const data: ReceiptFirestore = {
       created_at: Timestamp.fromDate(receipt.created_at),
       updated_at: Timestamp.fromDate(receipt.updated_at),
@@ -36,10 +34,9 @@ export const receiptConverter = {
     return data;
   },
   fromFirestore(
-    snapshot: QueryDocumentSnapshot,
-    options: SnapshotOptions
+    snapshot: QueryDocumentSnapshot
   ): Receipt {
-    const data: DocumentData = snapshot.data(options);
+    const data = snapshot.data();
     const receipt: Receipt = {
       created_at: data.created_at.toDate(),
       updated_at: data.updated_at.toDate(),

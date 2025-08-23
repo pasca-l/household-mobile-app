@@ -6,12 +6,12 @@ import {
   signOut,
 } from "firebase/auth";
 
-import { SignIn, isEmail } from "../types/signin";
-
 import { AUTHENTICATION } from "@/utils/firebase/firebaseConfig";
 import { GOOGLE_PROVIDER } from "@/utils/firebase/providers/authProviders";
 
-export const signInFirebaseAuth = ({ ...args }: SignIn) => {
+import { SignIn, isEmail } from "../types/signin";
+
+export const signInFirebaseAuth = async ({ ...args }: SignIn) => {
   if (isEmail(args)) {
     return signInWithEmailAndPassword(
       AUTHENTICATION,
@@ -21,11 +21,8 @@ export const signInFirebaseAuth = ({ ...args }: SignIn) => {
   } else {
     switch (args.method) {
       case "google":
-        return setPersistence(AUTHENTICATION, browserSessionPersistence).then(
-          async () => {
-            await signInWithPopup(AUTHENTICATION, GOOGLE_PROVIDER);
-          }
-        );
+        await setPersistence(AUTHENTICATION, browserSessionPersistence);
+        await signInWithPopup(AUTHENTICATION, GOOGLE_PROVIDER);
     }
   }
 };

@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { collection, onSnapshot, or, query, where } from "firebase/firestore";
 
-import { Spendings } from "../types/spendings";
 
 import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 import { useFirebaseAuth } from "@/utils/firebase/hooks/useFirebaseAuth";
+
+import { Spendings } from "../types/spendings";
 
 export const useSpendingsList = () => {
   const user = useFirebaseAuth();

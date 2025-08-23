@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { collection, onSnapshot, query } from "firebase/firestore";
 
+import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
+
 import { useVaultList } from "./useVaultList";
 import { useVaultContext } from "../contexts/VaultContext";
 import { Note, noteConverter } from "../types/note";
 
-import { FIRESTORE } from "@/utils/firebase/firebaseConfig";
 
 export const useNoteList = () => {
   const { id } = useVaultContext();
