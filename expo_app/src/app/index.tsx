@@ -11,13 +11,13 @@ export default function Root() {
       <AuthenticationPage
         handleSpendingsRoute={(spendingsId: string) => {
           router.push({
-            pathname: "/spendings/[id]/",
+            pathname: "/spendings/[id]",
             params: { id: spendingsId },
           });
         }}
         handleVaultRoute={(vaultId: string) => {
           router.push({
-            pathname: "/vaults/[id]/",
+            pathname: "/vaults/[id]",
             params: { id: vaultId },
           });
         }}

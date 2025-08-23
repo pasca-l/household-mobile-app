@@ -15,8 +15,6 @@ export default function SpendingsTabLayout() {
       <Tabs
         screenOptions={{
           headerShown: false,
-          // for passing params across tabs
-          unmountOnBlur: false,
         }}
       >
         <Tabs.Screen
