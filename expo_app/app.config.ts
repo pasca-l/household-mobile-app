@@ -1,0 +1,61 @@
+import { ExpoConfig, ConfigContext } from "expo/config";
+
+export default ({ config }: ConfigContext): ExpoConfig => {
+  return {
+    ...config,
+    name: "Household App",
+    slug: "household-app",
+    version: "1.0.0",
+    orientation: "portrait",
+    icon: "./src/assets/images/icon.png",
+    scheme: "myapp",
+    userInterfaceStyle: "automatic",
+    newArchEnabled: true,
+    splash: {
+      image: "./src/assets/images/splash.png",
+      resizeMode: "contain",
+      backgroundColor: "#ffffff"
+    },
+    assetBundlePatterns: [
+      "**/*"
+    ],
+    ios: {
+      supportsTablet: true,
+      bundleIdentifier: "com.pascal.householdapp"
+    },
+    android: {
+      adaptiveIcon: {
+        foregroundImage: "./src/assets/images/adaptive-icon.png",
+        backgroundColor: "#ffffff"
+      },
+      package: "com.pascal.householdapp"
+    },
+    web: {
+      bundler: "metro",
+      output: "static",
+      favicon: "./src/assets/images/favicon.png"
+    },
+    plugins: [
+      "expo-router",
+      "expo-font"
+    ],
+    experiments: {
+      typedRoutes: true,
+      baseUrl: process.env.EXPO_BASE_URL || "/"
+    },
+    extra: {
+      router: {
+        origin: false
+      },
+      eas: {
+        projectId: "29539215-1e84-4327-a97b-f286ca9eb1df"
+      }
+    },
+    runtimeVersion: {
+      policy: "appVersion"
+    },
+    updates: {
+      url: "https://u.expo.dev/29539215-1e84-4327-a97b-f286ca9eb1df"
+    }
+  };
+};

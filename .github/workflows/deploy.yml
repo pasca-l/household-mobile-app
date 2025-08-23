@@ -30,6 +30,8 @@ jobs:
 
       - name: install dependencies and build web app
         working-directory: ${{ env.APP_ROUTE }}
+        env:
+          EXPO_BASE_URL: /household-mobile-app
         run: |
           npm install
           npm run build:web
