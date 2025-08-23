@@ -14,7 +14,6 @@ concurrency:
 
 env:
   APP_ROUTE: ./expo_app
-  REPO_NAME: ${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
 
 jobs:
   build:
@@ -31,7 +30,7 @@ jobs:
       - name: install dependencies and build web app
         working-directory: ${{ env.APP_ROUTE }}
         env:
-          EXPO_BASE_URL: /household-mobile-app
+          EXPO_BASE_URL: /${{ github.event.repository.name }}
         run: |
           npm install
           npm run build:web
